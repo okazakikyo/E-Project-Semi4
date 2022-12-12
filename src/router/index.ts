@@ -60,6 +60,11 @@ const routes = [
         name: 'CreateRoom',
         component: () => import('@/views/Admin/Booking/CreateRoom.vue')
       },
+      {
+        path: '/room-list',
+        name: 'RoomList',
+        component: () => import('@/views/Room/RoomList.vue')
+      },
   //     {
   //       path: '/theme/colors',
   //       name: 'Colors',

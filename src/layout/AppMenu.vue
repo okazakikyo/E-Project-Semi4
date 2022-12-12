@@ -117,7 +117,7 @@ const model = ref([
                     {
                         label: 'Room List',
                         icon: 'pi pi-fw pi-sign-in',
-                        to: '/auth/login'
+                        to: '/room-list'
                     },
                     {
                         label: 'Error',
