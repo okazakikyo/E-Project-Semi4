@@ -4,11 +4,10 @@ import router from './router'
 import store from './stores'
 import App from './App.vue'
 import BootstrapVue3 from "bootstrap-vue-3";
-import CoreuiVue from '@coreui/vue'
 import Datepicker from '@vuepic/vue-datepicker';
 import {LoadingPlugin} from 'vue-loading-overlay';
 import { createPinia } from 'pinia'
-import CIcon from '@coreui/icons-vue'
+
 
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
@@ -130,11 +129,9 @@ app.use(pinia);
 app.use(router)
 app.use(store)
 app.mount('#app')
-app.use(CoreuiVue)
 app.use(BootstrapVue3)
 app.component('Datepicker', Datepicker)
 app.use(LoadingPlugin);
-app.component('CIcon', CIcon)
 app.use(PrimeVue, { ripple: true });
 app.use(ToastService);
 app.use(DialogService);
@@ -150,44 +147,44 @@ app.directive('styleclass', StyleClass);
 
 // app.component('Accordion', Accordion);
 // app.component('AccordionTab', AccordionTab);
-// app.component('AutoComplete', AutoComplete);
+app.component('AutoComplete', AutoComplete);
 // app.component('Avatar', Avatar);
 // app.component('AvatarGroup', AvatarGroup);
 // app.component('Badge', Badge);
 // app.component('BlockUI', BlockUI);
 // app.component('Breadcrumb', Breadcrumb);
 app.component('Button', Button);
-// app.component('Calendar', Calendar);
+app.component('Calendar', Calendar);
 // app.component('Card', Card);
 // app.component('Chart', Chart);
 // app.component('Carousel', Carousel);
 // app.component('CascadeSelect', CascadeSelect);
 // app.component('Checkbox', Checkbox);
 // app.component('Chip', Chip);
-// app.component('Chips', Chips);
+app.component('Chips', Chips);
 // app.component('ColorPicker', ColorPicker);
-// app.component('Column', Column);
-// app.component('ColumnGroup', ColumnGroup);
+app.component('Column', Column);
+app.component('ColumnGroup', ColumnGroup);
 // app.component('ConfirmDialog', ConfirmDialog);
 // app.component('ConfirmPopup', ConfirmPopup);
 // app.component('ContextMenu', ContextMenu);
-// app.component('DataTable', DataTable);
+app.component('DataTable', DataTable);
 // app.component('DataView', DataView);
 // app.component('DataViewLayoutOptions', DataViewLayoutOptions);
 // app.component('DeferredContent', DeferredContent);
 app.component('Dialog', Dialog);
 // app.component('Divider', Divider);
 // app.component('Dock', Dock);
-// app.component('Dropdown', Dropdown);
-// app.component('DynamicDialog', DynamicDialog);
+app.component('Dropdown', Dropdown);
+app.component('DynamicDialog', DynamicDialog);
 // app.component('Fieldset', Fieldset);
 // app.component('FileUpload', FileUpload);
 // app.component('Galleria', Galleria);
 // app.component('Image', Image);
 // app.component('InlineMessage', InlineMessage);
 // app.component('Inplace', Inplace);
-// app.component('InputMask', InputMask);
-// app.component('InputNumber', InputNumber);
+app.component('InputMask', InputMask);
+app.component('InputNumber', InputNumber);
 app.component('InputSwitch', InputSwitch);
 app.component('InputText', InputText);
 // app.component('Knob', Knob);
@@ -196,7 +193,7 @@ app.component('InputText', InputText);
 // app.component('Menu', Menu);
 // app.component('Menubar', Menubar);
 // app.component('Message', Message);
-// app.component('MultiSelect', MultiSelect);
+app.component('MultiSelect', MultiSelect);
 // app.component('OrderList', OrderList);
 // app.component('OrganizationChart', OrganizationChart);
 // app.component('OverlayPanel', OverlayPanel);
@@ -205,7 +202,7 @@ app.component('InputText', InputText);
 // app.component('PanelMenu', PanelMenu);
 app.component('Password', Password);
 // app.component('PickList', PickList);
-// app.component('ProgressBar', ProgressBar);
+app.component('ProgressBar', ProgressBar);
 // app.component('ProgressSpinner', ProgressSpinner);
 app.component('RadioButton', RadioButton);
 // app.component('Rating', Rating);
@@ -213,7 +210,7 @@ app.component('RadioButton', RadioButton);
 // app.component('SelectButton', SelectButton);
 // app.component('ScrollPanel', ScrollPanel);
 // app.component('ScrollTop', ScrollTop);
-// app.component('Slider', Slider);
+app.component('Slider', Slider);
 app.component('Sidebar', Sidebar);
 // app.component('Skeleton', Skeleton);
 // app.component('SpeedDial', SpeedDial);
@@ -225,15 +222,15 @@ app.component('Sidebar', Sidebar);
 // app.component('TabView', TabView);
 // app.component('TabPanel', TabPanel);
 // app.component('Tag', Tag);
-// app.component('Textarea', Textarea);
+app.component('Textarea', Textarea);
 // app.component('Terminal', Terminal);
 // app.component('TieredMenu', TieredMenu);
 // app.component('Timeline', Timeline);
 // app.component('Toast', Toast);
 // app.component('Toolbar', Toolbar);
-// app.component('ToggleButton', ToggleButton);
+app.component('ToggleButton', ToggleButton);
 // app.component('Tree', Tree);
 // app.component('TreeSelect', TreeSelect);
 // app.component('TreeTable', TreeTable);
-// app.component('TriStateCheckbox', TriStateCheckbox);
+app.component('TriStateCheckbox', TriStateCheckbox);
 // app.component('VirtualScroller', VirtualScroller);

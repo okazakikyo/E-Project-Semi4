@@ -15,9 +15,9 @@ const model = ref([
                 label: 'User', icon: 'pi pi-fw pi-user', to: '/uikit/formlayout',
                 items: [
                     {
-                        label: 'Login',
-                        icon: 'pi pi-fw pi-sign-in',
-                        to: '/auth/login'
+                        label: 'User List',
+                        icon: 'pi pi-fw pi-list',
+                        to: '/hr/user-list'
                     },
                     {
                         label: 'Error',
@@ -55,14 +55,14 @@ const model = ref([
                 label: 'Booking', icon: 'pi pi-fw pi-bookmark', to: '/uikit/floatlabel' ,
                 items: [
                     {
-                        label: 'Login',
-                        icon: 'pi pi-fw pi-sign-in',
-                        to: '/auth/login'
+                        label: 'Booking List',
+                        icon: 'pi pi-fw pi-list',
+                        to: '/admin/booking-list'
                     },
                     {
-                        label: 'Error',
-                        icon: 'pi pi-fw pi-times-circle',
-                        to: '/auth/error'
+                        label: 'Create room',
+                        icon: 'pi pi-fw pi-pencil',
+                        to: '/admin/create-room'
                     },
                     {
                         label: 'Access Denied',
@@ -111,7 +111,26 @@ const model = ref([
                     }
                 ]
             },
-            { label: 'Table', icon: 'pi pi-fw pi-table', to: '/uikit/table' },
+            { 
+                label: 'Room', icon: 'pi pi-fw pi-table', to: '/uikit/table',
+                items: [
+                    {
+                        label: 'Room List',
+                        icon: 'pi pi-fw pi-sign-in',
+                        to: '/auth/login'
+                    },
+                    {
+                        label: 'Error',
+                        icon: 'pi pi-fw pi-times-circle',
+                        to: '/auth/error'
+                    },
+                    {
+                        label: 'Access Denied',
+                        icon: 'pi pi-fw pi-lock',
+                        to: '/auth/access'
+                    }
+                ]
+            },
             { label: 'List', icon: 'pi pi-fw pi-list', to: '/uikit/list' },
             { label: 'Tree', icon: 'pi pi-fw pi-share-alt', to: '/uikit/tree' },
             { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: '/uikit/panel' },

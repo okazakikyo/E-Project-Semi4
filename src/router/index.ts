@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import AppLayout from '@/layout/AppLayout.vue';
+import Error from '@/views/Error.vue';
 const Login = () => import("@/views/Login.vue");
 
 const ifNotAuthenticated = (to: any, from: any, next: any) => {
@@ -24,15 +25,40 @@ const routes = [
     component: Login,
   },
   {
+    path: '/register',
+    name: 'Registration',
+    component: () => import('@/views/Registration.vue')
+  },
+  {
     path: '/',
     name: 'Home',
     component: AppLayout,
     // beforeEnter: ifNotAuthenticated,
     children: [
       {
-        path: '/dashboard',
+        path: '/',
         name: 'Dashboard',
         component: () => import('@/views/Dashboard.vue')
+      },
+      {
+        path: '/calendar',
+        name: 'Calendar',
+        component: () => import('@/components/CalendarDemo.vue')
+      },
+      {
+        path: '/hr/user-list',
+        name: 'UserList',
+        component: () => import('@/views/HR/User/UserList.vue')
+      },
+      {
+        path: '/admin/booking-list',
+        name: 'BookingList',
+        component: () => import('@/views/Admin/Booking/BookingList.vue')
+      },
+      {
+        path: '/admin/create-room',
+        name: 'CreateRoom',
+        component: () => import('@/views/Admin/Booking/CreateRoom.vue')
       },
   //     {
   //       path: '/theme/colors',
@@ -303,6 +329,7 @@ const routes = [
   //     },
     ],
   },
+  { path: "/:pathMatch(.*)*", component: Error },
 ]
 
 const router = createRouter({

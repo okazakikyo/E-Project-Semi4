@@ -1,0 +1,8 @@
+{
+    "code": "en",
+    "messages" : {
+        "required": "{field} is required",
+        "confirmed" : "{field} doesnt match",
+        "email": "Email format is invalid" 
+    }
+}
