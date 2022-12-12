@@ -7,7 +7,7 @@ import BootstrapVue3 from "bootstrap-vue-3";
 import Datepicker from '@vuepic/vue-datepicker';
 import {LoadingPlugin} from 'vue-loading-overlay';
 import { createPinia } from 'pinia'
-
+import VueLoading from "vue-loading-overlay";
 
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
@@ -136,6 +136,7 @@ app.use(PrimeVue, { ripple: true });
 app.use(ToastService);
 app.use(DialogService);
 app.use(ConfirmationService);
+app.use(VueLoading);
 
 app.directive('tooltip', Tooltip);
 app.directive('badge', BadgeDirective);

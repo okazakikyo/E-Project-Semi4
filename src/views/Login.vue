@@ -172,6 +172,7 @@ import type { UserLogin } from "@/http/type";
 import { Field, Form, ErrorMessage } from "vee-validate";
 import AppConfig from "@/layout/AppConfig.vue";
 import InputComponent from "@/components/InputComponent.vue";
+import { useLoading } from "vue-loading-overlay";
 
 export default defineComponent({
   setup() {
@@ -195,8 +196,10 @@ export default defineComponent({
   },
   methods: {
     onSubmit() {
-      this.displayConfirmation = true;
+      const $loading = useLoading();
+      const loader = $loading.show({});
       this.$router.push({ name: "Dashboard" });
+      loader.hide();
     },
     closeConfirmation() {
       this.displayConfirmation = false;

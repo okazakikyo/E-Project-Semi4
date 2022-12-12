@@ -131,7 +131,7 @@ const model = ref([
                     }
                 ]
             },
-            { label: 'List', icon: 'pi pi-fw pi-list', to: '/uikit/list' },
+            { label: 'Logout', icon: 'pi pi-fw pi-sign-in', to: '/login' },
             { label: 'Tree', icon: 'pi pi-fw pi-share-alt', to: '/uikit/tree' },
             { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: '/uikit/panel' },
             { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: '/uikit/overlay' },
@@ -279,11 +279,6 @@ const model = ref([
             <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
             <li v-if="item.separator" class="menu-separator"></li>
         </template>
-        <li>
-            <a href="https://www.primefaces.org/primeblocks-vue/#/" target="_blank">
-                <img src="/layout/images/banner-primeblocks.png" alt="Prime Blocks" class="w-full mt-3" />
-            </a>
-        </li>
     </ul>
 </template>
 
