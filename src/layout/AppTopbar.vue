@@ -29,6 +29,11 @@ const logoUrl = computed(() => {
     layoutConfig.darkTheme.value ? "logo-white" : "logo-dark"
   }.svg`;
 });
+// const logoUrl = computed(() => {
+//   return `${contextPath}layout/images/${
+//     layoutConfig.darkTheme.value ? "logo-white" : "download"
+//   }.png`;
+// });
 
 const onTopBarMenuButton = () => {
   topbarMenuActive.value = !topbarMenuActive.value;

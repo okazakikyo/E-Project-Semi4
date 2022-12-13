@@ -112,7 +112,7 @@ const model = ref([
                 ]
             },
             { 
-                label: 'Room', icon: 'pi pi-fw pi-table', to: '/uikit/table',
+                label: 'Room', icon: 'pi pi-fw pi-home', to: '/uikit/table',
                 items: [
                     {
                         label: 'Room List',

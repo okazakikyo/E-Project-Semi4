@@ -179,7 +179,7 @@ app.component('Dialog', Dialog);
 app.component('Dropdown', Dropdown);
 app.component('DynamicDialog', DynamicDialog);
 // app.component('Fieldset', Fieldset);
-// app.component('FileUpload', FileUpload);
+app.component('FileUpload', FileUpload);
 // app.component('Galleria', Galleria);
 // app.component('Image', Image);
 // app.component('InlineMessage', InlineMessage);
