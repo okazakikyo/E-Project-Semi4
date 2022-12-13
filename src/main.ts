@@ -191,7 +191,7 @@ app.component('InputText', InputText);
 // app.component('Knob', Knob);
 // app.component('Listbox', Listbox);
 // app.component('MegaMenu', MegaMenu);
-// app.component('Menu', Menu);
+app.component('Menu', Menu);
 // app.component('Menubar', Menubar);
 // app.component('Message', Message);
 app.component('MultiSelect', MultiSelect);

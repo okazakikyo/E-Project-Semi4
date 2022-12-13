@@ -116,8 +116,8 @@
                   </template>
                 </Column>
                 <Column headerStyle="width:4rem">
-                  <template #body>
-                    <Button icon="pi pi-pencil" @click="editTrainerRoom()"/>
+                  <template #body="slotProps">
+                    <Button icon="pi pi-pencil" @click="editTrainerRoom(slotProps.data)"/>
                   </template>
                 </Column>
               </DataTable>
@@ -127,6 +127,17 @@
       </div>
     </div>
   </div>
+
+  <!-- Edit modal -->
+  <Dialog header="Header" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '50vw'}" :modal="true">
+            <p class="m-0">
+              {{ roomDetails }}
+            </p>
+            <template #footer>
+                <Button label="No" icon="pi pi-times" @click="closeEdit" class="p-button-text"/>
+                <Button label="Yes" icon="pi pi-check" @click="closeEdit" autofocus />
+            </template>
+  </Dialog>
 </template>
 <script setup lang="ts">
 import { FilterMatchMode, FilterOperator } from "primevue/api";
@@ -146,6 +157,8 @@ const loading2 = ref(null);
 const idFrozen = ref(false);
 const products = ref(null);
 const expandedRows = ref([]);
+const displayModal = ref(false);
+const roomDetails = ref({});
 const statuses = ref([
   "unqualified",
   "qualified",
@@ -216,8 +229,13 @@ const initFilters1 = () => {
     verified: { value: null, matchMode: FilterMatchMode.EQUALS },
   };
 };
-const editTrainerRoom = () => {
+const editTrainerRoom = (id: any) => {
+  displayModal.value = true;
+  roomDetails.value = id
+}
 
+const closeEdit = () => {
+  displayModal.value = false;
 }
 
 const clearFilter1 = () => {

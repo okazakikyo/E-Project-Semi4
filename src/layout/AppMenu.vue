@@ -35,7 +35,7 @@ const model = ref([
                 label: 'Staff', icon: 'pi pi-fw pi-id-card', to: '/uikit/input',
                 items: [
                     {
-                        label: 'Login',
+                        label: 'Trainee List',
                         icon: 'pi pi-fw pi-sign-in',
                         to: '/auth/login'
                     },
@@ -58,11 +58,6 @@ const model = ref([
                         label: 'Booking List',
                         icon: 'pi pi-fw pi-list',
                         to: '/admin/booking-list'
-                    },
-                    {
-                        label: 'Create room',
-                        icon: 'pi pi-fw pi-pencil',
-                        to: '/admin/create-room'
                     },
                     {
                         label: 'Access Denied',
@@ -116,13 +111,13 @@ const model = ref([
                 items: [
                     {
                         label: 'Room List',
-                        icon: 'pi pi-fw pi-sign-in',
+                        icon: 'pi pi-fw pi-list',
                         to: '/room-list'
                     },
                     {
-                        label: 'Error',
-                        icon: 'pi pi-fw pi-times-circle',
-                        to: '/auth/error'
+                        label: 'Create Room',
+                        icon: 'pi pi-fw pi-pencil',
+                        to: '/admin/create-room'
                     },
                     {
                         label: 'Access Denied',

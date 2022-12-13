@@ -121,7 +121,11 @@
                         </template>
                     </Column>
                     <!-- Edit -->
-                    <Column :rowEditor="true" style="width:10%; min-width:8rem" bodyStyle="text-align:center"></Column>
+                    <Column field="Edit" header="Edit" :rowEditor="true" style="width:10%; min-width:8rem" bodyClass="text-center">
+                        <template #body="slotProps">
+                            <Button icon="pi pi-pencil" @click="editUser(slotProps.data)"/>
+                        </template>
+                    </Column>
                 </DataTable>
                 
             </div>
@@ -275,6 +279,16 @@
                 </DataTable>
             </div>
         </div> -->
+        <!-- Edit modal -->
+  <Dialog header="Header" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '50vw'}" :modal="true">
+            <p class="m-0">
+              {{ userDetails }}
+            </p>
+            <template #footer>
+                <Button label="No" icon="pi pi-times" @click="closeEdit" class="p-button-text"/>
+                <Button label="Yes" icon="pi pi-check" @click="closeEdit" autofocus />
+            </template>
+  </Dialog>
     </div>
 </template>
 
@@ -296,6 +310,8 @@ const loading2 = ref(null);
 const idFrozen = ref(false);
 const products = ref(null);
 const expandedRows = ref([]);
+const userDetails = ref({});
+const displayModal = ref(false);
 const statuses = ref(['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal']);
 const representatives = ref([
     { name: 'Amy Elsner', image: 'amyelsner.png' },
@@ -361,6 +377,15 @@ const formatDate = (value) => {
         year: 'numeric'
     });
 };
+const editUser = (id) => {
+    userDetails.value = id;
+    displayModal.value = true
+}
+
+const closeEdit = () => {
+    displayModal.value = false
+}
+
 const calculateCustomerTotal = (name) => {
     let total = 0;
     if (customer3.value) {
