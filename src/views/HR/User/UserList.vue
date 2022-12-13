@@ -100,7 +100,7 @@
                             </Dropdown>
                         </template>
                     </Column>
-                    <Column field="activity" header="Activity" :showFilterMatchModes="false" style="min-width: 12rem">
+                    <Column field="capacity" header="Capacity" :showFilterMatchModes="false" style="min-width: 12rem">
                         <template #body="{ data }">
                             <ProgressBar :value="data.activity" :showValue="false" style="height: 0.5rem"></ProgressBar>
                         </template>
@@ -112,7 +112,7 @@
                             </div>
                         </template>
                     </Column>
-                    <Column field="verified" header="Verified" dataType="boolean" bodyClass="text-center" style="min-width: 8rem">
+                    <Column field="active" header="Active" dataType="boolean" bodyClass="text-center" style="min-width: 8rem">
                         <template #body="{ data }">
                             <i class="pi" :class="{ 'text-green-500 pi-check-circle': data.verified, 'text-pink-500 pi-times-circle': !data.verified }"></i>
                         </template>
@@ -130,160 +130,18 @@
                 
             </div>
         </div>
-
-        <!-- <div class="col-12">
-            <div class="card">
-                <h5>Frozen Columns</h5>
-                <ToggleButton v-model="idFrozen" onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Id" offLabel="Freeze Id" style="width: 10rem" />
-
-                <DataTable :value="customer2" :scrollable="true" scrollHeight="400px" :loading="loading2" scrollDirection="both" class="mt-3">
-                    <Column field="name" header="Name" :style="{ width: '150px' }" frozen></Column>
-                    <Column field="id" header="Id" :style="{ width: '100px' }" :frozen="idFrozen"></Column>
-                    <Column field="country.name" header="Country" :style="{ width: '200px' }">
-                        <template #body="{ data }">
-                            <img src="/demo/images/flag/flag_placeholder.png" :class="'flag flag-' + data.country.code" width="30" />
-                            <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ data.country.name }}</span>
-                        </template>
-                    </Column>
-                    <Column field="date" header="Date" :style="{ width: '200px' }"></Column>
-                    <Column field="company" header="Company" :style="{ width: '200px' }"></Column>
-                    <Column field="status" header="Status" :style="{ width: '200px' }">
-                        <template #body="{ data }">
-                            <span :class="'customer-badge status-' + data.status">{{ data.status }}</span>
-                        </template>
-                    </Column>
-                    <Column field="activity" header="Activity" :style="{ width: '200px' }"></Column>
-                    <Column field="representative.name" header="Representative" :style="{ width: '200px' }">
-                        <template #body="{ data }">
-                            <img :alt="data.representative.name" :src="contextPath + 'demo/images/avatar/' + data.representative.image" width="32" style="vertical-align: middle" />
-                            <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ data.representative.name }}</span>
-                        </template>
-                    </Column>
-                    <Column field="balance" header="Balance" :style="{ width: '150px' }" frozen alignFrozen="right">
-                        <template #body="{ data }">
-                            <span class="text-bold">{{ formatCurrency(data.balance) }}</span>
-                        </template>
-                    </Column>
-                </DataTable>
-            </div>
-        </div>
-
-        <div class="col-12">
-            <div class="card">
-                <h5>Row Expand</h5>
-                <DataTable :value="products" v-model:expandedRows="expandedRows" dataKey="id" responsiveLayout="scroll">
-                    <template #header>
-                        <div>
-                            <Button icon="pi pi-plus" label="Expand All" @click="expandAll" class="mr-2 mb-2" />
-                            <Button icon="pi pi-minus" label="Collapse All" @click="collapseAll" class="mb-2" />
-                        </div>
-                    </template>
-                    <Column :expander="true" headerStyle="width: 3rem" />
-                    <Column field="name" header="Name" :sortable="true">
-                        <template #body="slotProps">
-                            {{ slotProps.data.name }}
-                        </template>
-                    </Column>
-                    <Column header="Image">
-                        <template #body="slotProps">
-                            <img :src="contextPath + 'demo/images/product/' + slotProps.data.image" :alt="slotProps.data.image" class="shadow-2" width="100" />
-                        </template>
-                    </Column>
-                    <Column field="price" header="Price" :sortable="true">
-                        <template #body="slotProps">
-                            {{ formatCurrency(slotProps.data.price) }}
-                        </template>
-                    </Column>
-                    <Column field="category" header="Category" :sortable="true">
-                        <template #body="slotProps">
-                            {{ formatCurrency(slotProps.data.category) }}
-                        </template></Column
-                    >
-                    <Column field="rating" header="Reviews" :sortable="true">
-                        <template #body="slotProps">
-                            <Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false" />
-                        </template>
-                    </Column>
-                    <Column field="inventoryStatus" header="Status" :sortable="true">
-                        <template #body="slotProps">
-                            <span :class="'product-badge status-' + (slotProps.data.inventoryStatus ? slotProps.data.inventoryStatus.toLowerCase() : '')">{{ slotProps.data.inventoryStatus }}</span>
-                        </template>
-                    </Column>
-                    <template #expansion="slotProps">
-                        <div class="p-3">
-                            <h5>Orders for {{ slotProps.data.name }}</h5>
-                            <DataTable :value="slotProps.data.orders" responsiveLayout="scroll">
-                                <Column field="id" header="Id" :sortable="true">
-                                    <template #body="slotProps">
-                                        {{ slotProps.data.id }}
-                                    </template>
-                                </Column>
-                                <Column field="customer" header="Customer" :sortable="true">
-                                    <template #body="slotProps">
-                                        {{ slotProps.data.customer }}
-                                    </template>
-                                </Column>
-                                <Column field="date" header="Date" :sortable="true">
-                                    <template #body="slotProps">
-                                        {{ slotProps.data.date }}
-                                    </template>
-                                </Column>
-                                <Column field="amount" header="Amount" :sortable="true">
-                                    <template #body="slotProps">
-                                        {{ formatCurrency(slotProps.data.amount) }}
-                                    </template>
-                                </Column>
-                                <Column field="status" header="Status" :sortable="true">
-                                    <template #body="slotProps">
-                                        <span :class="'order-badge order-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ slotProps.data.status }}</span>
-                                    </template>
-                                </Column>
-                                <Column headerStyle="width:4rem">
-                                    <template #body>
-                                        <Button icon="pi pi-search" />
-                                    </template>
-                                </Column>
-                            </DataTable>
-                        </div>
-                    </template>
-                </DataTable>
-            </div>
-        </div>
-
-        <div class="col-12">
-            <div class="card">
-                <h5>Subheader Grouping</h5>
-                <DataTable :value="customer3" rowGroupMode="subheader" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" :sortOrder="1" scrollable scrollHeight="400px">
-                    <Column field="representative.name" header="Representative"></Column>
-                    <Column field="name" header="Name" style="min-width: 200px"></Column>
-                    <Column field="country" header="Country" style="min-width: 200px">
-                        <template #body="slotProps">
-                            <img src="/demo/images/flag/flag_placeholder.png" :class="'flag flag-' + slotProps.data.country.code" width="30" />
-                            <span class="image-text ml-2">{{ slotProps.data.country.name }}</span>
-                        </template>
-                    </Column>
-                    <Column field="company" header="Company" style="min-width: 200px"></Column>
-                    <Column field="status" header="Status" style="min-width: 200px">
-                        <template #body="slotProps">
-                            <span :class="'customer-badge status-' + slotProps.data.status">{{ slotProps.data.status }}</span>
-                        </template>
-                    </Column>
-                    <Column field="date" header="Date" style="min-width: 200px"></Column>
-                    <template #groupheader="slotProps">
-                        <img :alt="slotProps.data.representative.name" :src="contextPath + 'demo/images/avatar/' + slotProps.data.representative.image" width="32" style="vertical-align: middle" />
-                        <span class="image-text font-bold ml-2">{{ slotProps.data.representative.name }}</span>
-                    </template>
-                    <template #groupfooter="slotProps">
-                        <td style="text-align: right" class="text-bold pr-6">Total Customers: {{ calculateCustomerTotal(slotProps.data.representative.name) }}</td>
-                    </template>
-                </DataTable>
-            </div>
-        </div> -->
         <!-- Edit modal -->
   <Dialog header="Header" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '50vw'}" :modal="true">
             <p class="m-0">
               {{ userDetails }}
             </p>
+            <div class="card p-fluid">
+                <label>Name</label>
+                <InputText :value="userDetails.name" v-model="userDetails.name"/>
+
+                <label>Status</label>
+                <Dropdown v-model="userDetails.verified" :selected="selectedStatus" :options="statusList" optionLabel="name" optionValue="code" placeholder="Select a Status" />
+            </div>
             <template #footer>
                 <Button label="No" icon="pi pi-times" @click="closeEdit" class="p-button-text"/>
                 <Button label="Yes" icon="pi pi-check" @click="closeEdit" autofocus />
@@ -311,6 +169,11 @@ const idFrozen = ref(false);
 const products = ref(null);
 const expandedRows = ref([]);
 const userDetails = ref({});
+const selectedStatus = ref();
+const statusList = ref([
+    {name: 'Active', code: true},
+    {name: 'Unactive', code: false},
+])
 const displayModal = ref(false);
 const statuses = ref(['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal']);
 const representatives = ref([
@@ -380,6 +243,11 @@ const formatDate = (value) => {
 const editUser = (id) => {
     userDetails.value = id;
     displayModal.value = true
+    if(id.verified == true) {
+        selectedStatus.value = "Active"
+    } else if(id.verified == false) {
+        selectedStatus.value = "Unactive"
+    }
 }
 
 const closeEdit = () => {

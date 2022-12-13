@@ -65,6 +65,11 @@ const routes = [
         name: 'RoomList',
         component: () => import('@/views/Room/RoomList.vue')
       },
+      {
+        path: '/trainee-list',
+        name: 'TraineeList',
+        component: () => import('@/views/Trainee/TraineeList.vue')
+      },
   //     {
   //       path: '/theme/colors',
   //       name: 'Colors',
