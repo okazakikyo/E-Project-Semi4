@@ -24,7 +24,7 @@
                         <span class="image-text font-bold ml-2">{{ slotProps.data.representative.name }}</span>
                     </template>
                     <template #groupfooter="slotProps">
-                        <td style="text-align: right" class="text-bold pr-6">Total Trainee: {{ calculateCustomerTotal(slotProps.data.representative.name) }}</td>
+                        <td style="text-align: right" class="text-bold pr-6">Total Trainer: {{ calculateCustomerTotal(slotProps.data.representative.name) }}</td>
                     </template>
                 </DataTable>
             </div>
