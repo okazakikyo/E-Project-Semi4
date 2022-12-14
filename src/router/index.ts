@@ -70,6 +70,11 @@ const routes = [
         name: 'TraineeList',
         component: () => import('@/views/Trainee/TraineeList.vue')
       },
+      {
+        path: '/hr/staff',
+        name: 'StaffManage',
+        component: () => import('@/views/HR/StaffManage.vue')
+      },
   //     {
   //       path: '/theme/colors',
   //       name: 'Colors',

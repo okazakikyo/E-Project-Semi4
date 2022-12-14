@@ -36,13 +36,13 @@ const model = ref([
                 items: [
                     {
                         label: 'Trainee List',
-                        icon: 'pi pi-fw pi-sign-in',
+                        icon: 'pi pi-fw pi-list',
                         to: '/trainee-list'
                     },
                     {
-                        label: 'Error',
-                        icon: 'pi pi-fw pi-times-circle',
-                        to: '/auth/error'
+                        label: 'Staff Manage',
+                        icon: 'pi pi-fw pi-user',
+                        to: '/hr/staff'
                     },
                     {
                         label: 'Access Denied',
