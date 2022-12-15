@@ -1,3 +1,7 @@
+export interface GenericResponse {
+    result: any;
+    error: string;
+}
 export interface User {
     userId: number;
     userName: string;
