@@ -12,7 +12,7 @@ const model = ref([
         label: 'List management',
         items: [
             { 
-                label: 'User', icon: 'pi pi-fw pi-user', to: '/uikit/formlayout',
+                label: 'User', icon: 'pi pi-fw pi-user',
                 items: [
                     {
                         label: 'User List',
@@ -32,7 +32,7 @@ const model = ref([
                 ]
             },
             { 
-                label: 'Staff', icon: 'pi pi-fw pi-id-card', to: '/uikit/input',
+                label: 'Staff', icon: 'pi pi-fw pi-id-card',
                 items: [
                     {
                         label: 'Trainee List',
@@ -52,7 +52,7 @@ const model = ref([
                 ]
             },
             { 
-                label: 'Booking', icon: 'pi pi-fw pi-bookmark', to: '/uikit/floatlabel' ,
+                label: 'Booking', icon: 'pi pi-fw pi-bookmark',
                 items: [
                     {
                         label: 'Booking List',
@@ -67,7 +67,7 @@ const model = ref([
                 ]
             },
             { 
-                label: 'Department', icon: 'pi pi-fw pi-home', to: '/uikit/invalidstate',
+                label: 'Department', icon: 'pi pi-fw pi-home',
                 items: [
                     {
                         label: 'Login',
@@ -87,7 +87,7 @@ const model = ref([
                 ]
             },
             { 
-                label: 'Training', icon: 'pi pi-fw pi-mobile', to: '/uikit/button', class: 'rotated-icon',
+                label: 'Training', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon',
                 items: [
                     {
                         label: 'Login',
@@ -107,7 +107,7 @@ const model = ref([
                 ]
             },
             { 
-                label: 'Room', icon: 'pi pi-fw pi-home', to: '/uikit/table',
+                label: 'Room', icon: 'pi pi-fw pi-home',
                 items: [
                     {
                         label: 'Room List',

@@ -36,7 +36,10 @@ const logoUrl = computed(() => {
 // });
 
 const onTopBarMenuButton = () => {
-  topbarMenuActive.value = !topbarMenuActive.value;
+  topbarMenuActive.value = !topbarMenuActive.value
+};
+
+const toCalendar = () => {
   router.push({ name: 'Calendar' })
 };
 
@@ -47,6 +50,7 @@ const editUserMenu = () => {
 };
 
 const editUserProfile = () => {
+  topbarMenuActive.value = !topbarMenuActive.value;
   enableEdit.value = true;
 };
 
@@ -113,7 +117,7 @@ const isOutsideClicked = (event) => {
     </button>
 
     <div class="layout-topbar-menu" :class="topbarMenuClasses">
-      <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
+      <button @click="toCalendar()" class="p-link layout-topbar-button">
         <i class="pi pi-calendar"></i>
         <span>Calendar</span>
       </button>
