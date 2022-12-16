@@ -41,7 +41,7 @@
           class="event"
           :class="{
             // 'miniEvent holiday': isEventHoliday(i, j),
-            'miniEvent holiday': checkHoliday(i, j),
+            'miniEvent holiday': checkHoliday(7 * i + j - offset - 1),
           }"
         ></div>
         <div

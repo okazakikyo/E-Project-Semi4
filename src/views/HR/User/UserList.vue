@@ -1,4 +1,6 @@
 <template>
+    <Button @click="clickGetUser">Get</Button>
+    {{ userList }}
     <div class="grid">
         <div class="col-12">
             <div class="card">
@@ -156,6 +158,8 @@ import CustomerService from '@/service/CustomerService';
 import ProductService from '@/service/ProductService';
 import { ref, onBeforeMount } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
+import { useUserStore } from '@/stores/user'
+import { mapActions, mapState } from 'pinia';
 
 const { contextPath } = useLayout();
 
@@ -170,6 +174,8 @@ const products = ref(null);
 const expandedRows = ref([]);
 const userDetails = ref({});
 const selectedStatus = ref();
+const userList = ref([]);
+
 const statusList = ref([
     {name: 'Active', code: true},
     {name: 'Unactive', code: false},
@@ -191,6 +197,8 @@ const representatives = ref([
 
 const customerService = new CustomerService();
 const productService = new ProductService();
+const storeUser = mapActions(useUserStore, ['getUser'])
+const dataUser = mapState(useUserStore, ['userList'])
 
 onBeforeMount(() => {
     productService.getProductsWithOrdersSmall().then((data) => (products.value = data));
@@ -203,8 +211,13 @@ onBeforeMount(() => {
     customerService.getCustomersMedium().then((data) => (customer3.value = data));
     loading2.value = false;
 
+    storeUser.getUser();
     initFilters1();
 });
+
+const clickGetUser = () => {
+    storeUser.getUser();
+}
 
 const initFilters1 = () => {
     filters1.value = {

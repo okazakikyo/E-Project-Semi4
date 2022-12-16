@@ -10,7 +10,8 @@ import { useErrorStore } from "@/stores/errors";
 
 export type RootState = {
   scheduleList: UserSchedule[],
-  postList: {}
+  postList: {},
+  userList: {},
 };
 
 export const useUserStore = defineStore({
@@ -18,6 +19,7 @@ export const useUserStore = defineStore({
     state: () => ({
       scheduleList: {},
       postList: {},
+      userList: {},
     } as RootState),
     actions: {
       setUserSchedule(scheduleList: UserSchedule) {
@@ -35,6 +37,18 @@ export const useUserStore = defineStore({
           this.postList = data
           return this.postList
         }catch(e) {}
+      },
+      async getUser() {
+        const storeError = useErrorStore();
+        try {
+          const response = await api.get<GenericResponse>(
+            'user'
+          )
+          console.log('aa')
+          console.log(response)
+          console.log(response.data)
+          this.userList = response.data
+        } catch(e) {}
       }
-    }
+    },
 })

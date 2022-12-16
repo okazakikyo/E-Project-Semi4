@@ -6,7 +6,8 @@ import App from "@/App.vue";
 const headers = {};
 headers["Content-type"] = "application/json";
 export const api: AxiosInstance = axios.create({
-    baseURL: "https://jsonplaceholder.typicode.com/",
+    // baseURL: "https://jsonplaceholder.typicode.com/",
+    baseURL: "http://localhost:5000/",
     // baseURL: import.meta.env.VITE_BASE_API_URL,
     headers: headers,
   });

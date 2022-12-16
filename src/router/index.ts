@@ -43,6 +43,11 @@ const routes = [
       {
         path: '/calendar',
         name: 'Calendar',
+        component: () => import('@/components/Calendar.vue')
+      },
+      {
+        path: '/calendar-demo',
+        name: 'CalendarDemo',
         component: () => import('@/components/CalendarDemo.vue')
       },
       {
