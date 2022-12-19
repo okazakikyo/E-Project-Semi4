@@ -8,6 +8,7 @@ import Datepicker from '@vuepic/vue-datepicker';
 import {LoadingPlugin} from 'vue-loading-overlay';
 import { createPinia } from 'pinia'
 import VueLoading from "vue-loading-overlay";
+import { auth } from '@/firebase/index'
 
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
@@ -137,6 +138,7 @@ app.use(ToastService);
 app.use(DialogService);
 app.use(ConfirmationService);
 app.use(VueLoading);
+app.use(auth);
 
 app.directive('tooltip', Tooltip);
 app.directive('badge', BadgeDirective);

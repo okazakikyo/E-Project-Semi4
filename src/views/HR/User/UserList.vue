@@ -1,6 +1,6 @@
 <template>
     <Button @click="clickGetUser">Get</Button>
-    {{ userList }}
+    {{ dataUser.userList() }}
     <div class="grid">
         <div class="col-12">
             <div class="card">
@@ -174,7 +174,6 @@ const products = ref(null);
 const expandedRows = ref([]);
 const userDetails = ref({});
 const selectedStatus = ref();
-const userList = ref([]);
 
 const statusList = ref([
     {name: 'Active', code: true},
@@ -217,6 +216,7 @@ onBeforeMount(() => {
 
 const clickGetUser = () => {
     storeUser.getUser();
+    dataUser.userList
 }
 
 const initFilters1 = () => {

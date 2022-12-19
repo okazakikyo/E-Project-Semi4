@@ -168,11 +168,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useUserStore } from "@/stores/user";
+import { useErrorStore } from "@/stores/errors";
 import type { UserLogin } from "@/http/type";
 import { Field, Form, ErrorMessage } from "vee-validate";
 import AppConfig from "@/layout/AppConfig.vue";
 import InputComponent from "@/components/InputComponent.vue";
 import { useLoading } from "vue-loading-overlay";
+import { mapActions, mapState } from "pinia";
 
 export default defineComponent({
   setup() {
@@ -194,11 +196,20 @@ export default defineComponent({
     AppConfig,
     InputComponent,
   },
+  computed: {
+    ...mapState(useErrorStore, ["errors"]),
+  },
   methods: {
-    onSubmit() {
+    ...mapActions(useUserStore, ['login']),
+    async onSubmit() {
       const $loading = useLoading();
       const loader = $loading.show({});
-      this.$router.push({ name: "Dashboard" });
+      try {
+        await this.login(this.userInfo);
+      } catch(e) {}
+      if(!this.errors) {
+        this.$router.push({ name: "Dashboard" });
+      }
       loader.hide();
     },
     closeConfirmation() {
