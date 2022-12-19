@@ -1,4 +1,5 @@
 <template>
+  {{ errors }}
   <v-form @submit="onSubmit">
     <div
       class="
@@ -67,7 +68,7 @@
               </div>
               <span class="text-600 font-medium">Sign in to continue</span>
             </div>
-
+            {{ errors }}
             <div>
               <label
                 for="email1"

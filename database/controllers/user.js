@@ -32,7 +32,8 @@ export const createUser = (req, res) => {
 }
 
 export const login = (req, res) => {
-    checkLogin(req.params.username, req.params.password, (err, result) => {
+    const data = req.body
+    checkLogin(data, (err, result) => {
         if(err) {
             res.send(err)
         } else {

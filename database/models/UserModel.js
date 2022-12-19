@@ -62,8 +62,8 @@ export const deleteUserById = (id, result) => {
     })
 }
 
-export const checkLogin = (id, pass, result) => {
-    db.query('select * from User where UserName = ? && Password = ?', id, pass, (err, res) => {
+export const checkLogin = (data, result) => {
+    db.query('select * from User where UserName like ? AND Password like ?', [data.UserName, data.Password], (err, res) => {
         if(err) {
             result(null, err)
             return

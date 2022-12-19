@@ -33,14 +33,15 @@ export const useUserStore = defineStore({
       async login(user: any) {
         const storeError = useErrorStore();
         try {
-          const { data } = await api.post<GenericResponse>(
+          const response = await api.post<GenericResponse>(
             'login',
             user
           )
-          console.log(data)
-          this.user = data
+          console.log(response)
+          this.user = response
           return this.user
         }catch(e) {
+          console.log(e)
           storeError.setError(e)
         }
       },
