@@ -8,7 +8,8 @@ import Datepicker from '@vuepic/vue-datepicker';
 import {LoadingPlugin} from 'vue-loading-overlay';
 import { createPinia } from 'pinia'
 import VueLoading from "vue-loading-overlay";
-import { auth } from '@/firebase/index'
+import { initializeApp } from 'firebase/app'
+// import { auth } from '@/firebase/index'
 
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
@@ -123,6 +124,17 @@ import "primevue/resources/primevue.min.css"
 import "primeicons/primeicons.css"
 import './assets/styles.scss';
 
+const firebaseConfig = {
+    apiKey: "AIzaSyDug3JI46uaZ1fDytPQra1kMpaZzAE58mw",
+    authDomain: "traineeprj4.firebaseapp.com",
+    projectId: "traineeprj4",
+    storageBucket: "traineeprj4.appspot.com",
+    messagingSenderId: "570863238804",
+    appId: "1:570863238804:web:78f0f37f26039717dcfe81",
+    measurementId: "G-0L5X4ZDK4Q"
+};
+initializeApp(firebaseConfig);
+
 const pinia = createPinia();
 const app = createApp(App)
 
@@ -138,7 +150,7 @@ app.use(ToastService);
 app.use(DialogService);
 app.use(ConfirmationService);
 app.use(VueLoading);
-app.use(auth);
+// app.use(auth);
 
 app.directive('tooltip', Tooltip);
 app.directive('badge', BadgeDirective);

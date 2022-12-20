@@ -36,7 +36,8 @@ export const login = (req, res) => {
     checkLogin(data, (err, result) => {
         if(err) {
             res.send(err)
-        } else {
+        } 
+        else if(data) {
             res.json(result)
         }
     })

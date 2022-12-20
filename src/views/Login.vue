@@ -57,18 +57,11 @@
               </template>
             </Dialog>
             <div class="text-center mb-5">
-              <img
-                src="/demo/images/login/avatar.png"
-                alt="Image"
-                height="50"
-                class="mb-3"
-              />
               <div class="text-900 text-3xl font-medium mb-3">
-                Welcome, Isabel!
+                Login
               </div>
-              <span class="text-600 font-medium">Sign in to continue</span>
             </div>
-            {{ errors }}
+            <div class="p-error" v-if="errMsg">{{ errMsg }}</div>
             <div>
               <label
                 for="email1"
@@ -84,6 +77,7 @@
                 <InputText
                   placeholder="Email address"
                   v-bind="field"
+                  v-model="userInfo.email"
                   :class="{ 'p-invalid': !meta.valid && meta.touched }"
                   class="w-full md:w-30rem mb-2"
                   style="padding: 1rem"
@@ -176,6 +170,7 @@ import AppConfig from "@/layout/AppConfig.vue";
 import InputComponent from "@/components/InputComponent.vue";
 import { useLoading } from "vue-loading-overlay";
 import { mapActions, mapState } from "pinia";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
 export default defineComponent({
   setup() {
@@ -189,6 +184,7 @@ export default defineComponent({
     checked: false,
     focusInput: false,
     displayConfirmation: false,
+    errMsg : '',
   }),
   components: {
     VForm: Form,
@@ -205,12 +201,27 @@ export default defineComponent({
     async onSubmit() {
       const $loading = useLoading();
       const loader = $loading.show({});
-      try {
-        await this.login(this.userInfo);
-      } catch(e) {}
-      if(!this.errors) {
+      const auth = getAuth()
+      signInWithEmailAndPassword(auth, this.userInfo.email, this.userInfo.password)
+      .then((data) => {
         this.$router.push({ name: "Dashboard" });
-      }
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "auth/invalid-email":
+            this.errMsg = "Invalid email"
+            break;
+          case "auth/user-not-found":
+            this.errMsg = "User not found"
+            break;
+          case "auth/wrong-password":
+            this.errMsg = "Wrong password"
+            break;
+          default:
+            this.errMsg = "Email or password is incorrect"
+            break;
+        }
+      })
       loader.hide();
     },
     closeConfirmation() {

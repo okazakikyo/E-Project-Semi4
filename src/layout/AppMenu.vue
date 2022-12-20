@@ -1,7 +1,11 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { getAuth, signOut } from 'firebase/auth';
+import router from '@/router';
 
 import AppMenuItem from './AppMenuItem.vue';
+
+const isLoggedIn = ref(false);
 
 const model = ref([
     {
@@ -126,130 +130,15 @@ const model = ref([
                     }
                 ]
             },
-            { label: 'Logout', icon: 'pi pi-fw pi-sign-in', to: '/login' },
-            // { label: 'Tree', icon: 'pi pi-fw pi-share-alt', to: '/uikit/tree' },
-            // { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: '/uikit/panel' },
-            // { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: '/uikit/overlay' },
-            // { label: 'Media', icon: 'pi pi-fw pi-image', to: '/uikit/media' },
-            // { label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/uikit/menu', preventExact: true },
-            // { label: 'Message', icon: 'pi pi-fw pi-comment', to: '/uikit/message' },
-            // { label: 'File', icon: 'pi pi-fw pi-file', to: '/uikit/file' },
-            // { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: '/uikit/charts' },
-            // { label: 'Misc', icon: 'pi pi-fw pi-circle', to: '/uikit/misc' }
         ]
     },
-    // {
-    //     label: 'Prime Blocks',
-    //     items: [
-    //         { label: 'Free Blocks', icon: 'pi pi-fw pi-eye', to: '/blocks', badge: 'NEW' },
-    //         { label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: 'https://www.primefaces.org/primeblocks-vue', target: '_blank' }
-    //     ]
-    // },
-    // {
-    //     label: 'Utilities',
-    //     items: [
-    //         { label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', to: '/utilities/icons' },
-    //         { label: 'PrimeFlex', icon: 'pi pi-fw pi-desktop', url: 'https://www.primefaces.org/primeflex/', target: '_blank' }
-    //     ]
-    // },
-    // {
-    //     label: 'Pages',
-    //     icon: 'pi pi-fw pi-briefcase',
-    //     to: '/pages',
-    //     items: [
-    //         {
-    //             label: 'Landing',
-    //             icon: 'pi pi-fw pi-globe',
-    //             to: '/landing'
-    //         },
-    //         {
-    //             label: 'Auth',
-    //             icon: 'pi pi-fw pi-user',
-    //             items: [
-    //                 {
-    //                     label: 'Login',
-    //                     icon: 'pi pi-fw pi-sign-in',
-    //                     to: '/auth/login'
-    //                 },
-    //                 {
-    //                     label: 'Error',
-    //                     icon: 'pi pi-fw pi-times-circle',
-    //                     to: '/auth/error'
-    //                 },
-    //                 {
-    //                     label: 'Access Denied',
-    //                     icon: 'pi pi-fw pi-lock',
-    //                     to: '/auth/access'
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             label: 'Crud',
-    //             icon: 'pi pi-fw pi-pencil',
-    //             to: '/pages/crud'
-    //         },
-    //         {
-    //             label: 'Timeline',
-    //             icon: 'pi pi-fw pi-calendar',
-    //             to: '/pages/timeline'
-    //         },
-    //         {
-    //             label: 'Not Found',
-    //             icon: 'pi pi-fw pi-exclamation-circle',
-    //             to: '/pages/notfound'
-    //         },
-    //         {
-    //             label: 'Empty',
-    //             icon: 'pi pi-fw pi-circle-off',
-    //             to: '/pages/empty'
-    //         }
-    //     ]
-    // },
-    // {
-    //     label: 'Hierarchy',
-    //     items: [
-    //         {
-    //             label: 'Submenu 1',
-    //             icon: 'pi pi-fw pi-bookmark',
-    //             items: [
-    //                 {
-    //                     label: 'Submenu 1.1',
-    //                     icon: 'pi pi-fw pi-bookmark',
-    //                     items: [
-    //                         { label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark' },
-    //                         { label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark' },
-    //                         { label: 'Submenu 1.1.3', icon: 'pi pi-fw pi-bookmark' }
-    //                     ]
-    //                 },
-    //                 {
-    //                     label: 'Submenu 1.2',
-    //                     icon: 'pi pi-fw pi-bookmark',
-    //                     items: [{ label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark' }]
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             label: 'Submenu 2',
-    //             icon: 'pi pi-fw pi-bookmark',
-    //             items: [
-    //                 {
-    //                     label: 'Submenu 2.1',
-    //                     icon: 'pi pi-fw pi-bookmark',
-    //                     items: [
-    //                         { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-    //                         { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' }
-    //                     ]
-    //                 },
-    //                 {
-    //                     label: 'Submenu 2.2',
-    //                     icon: 'pi pi-fw pi-bookmark',
-    //                     items: [{ label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' }]
-    //                 }
-    //             ]
-    //         }
-    //     ]
-    // },
 ]);
+const handleSignOut = () => {
+    let auth = getAuth()
+    signOut(auth).then(() => {
+        router.push("/login")
+    })
+}
 </script>
 
 <template>
@@ -258,7 +147,27 @@ const model = ref([
             <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
             <li v-if="item.separator" class="menu-separator"></li>
         </template>
+        <div class="logout" @click="handleSignOut()">
+            <i class="pi pi-fw pi-sign-in layout-menuitem-icon mr-2"></i>
+            <span class="text-menu">Logout</span>
+        </div>
     </ul>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.logout{
+    display: flex;
+    align-items: center;
+    position: relative;
+    outline: 0 none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+.text-menu{
+    font-size: 12px;
+    font-weight: bold;
+}
+</style>

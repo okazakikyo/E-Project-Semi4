@@ -75,6 +75,7 @@
                 <InputText
                   placeholder="Email address"
                   v-bind="field"
+                  v-model="userInfo.email"
                   :class="{ 'p-invalid': !meta.valid && meta.touched }"
                   class="w-full md:w-30rem mb-2"
                   style="padding: 1rem"
@@ -175,6 +176,7 @@ import type { UserLogin } from "@/http/type";
 import { Field, Form, ErrorMessage } from "vee-validate";
 import AppConfig from "@/layout/AppConfig.vue";
 import InputComponent from "@/components/InputComponent.vue";
+import { getAuth, createUserWithEmailAndPassword, UserCredential, sendEmailVerification, onAuthStateChanged } from 'firebase/auth'
 
 export default defineComponent({
   setup() {
@@ -197,9 +199,15 @@ export default defineComponent({
     InputComponent,
   },
   methods: {
-    onSubmit() {
-      this.displayConfirmation = true;
-      this.$router.push({ name: "Login" });
+    async onSubmit() {
+      await createUserWithEmailAndPassword(getAuth(), this.userInfo.email, this.userInfo.password)
+      .then((data) => {
+        alert('Registration successful')
+        this.$router.push({ name: "Login" });
+      })
+      .catch((error) => {
+        alert(error.message)
+      })
     },
     closeConfirmation() {
       this.displayConfirmation = false;
