@@ -18,4 +18,10 @@ export default class ProductService {
             .then((res) => res.json())
             .then((d) => d.data);
     }
+
+    getRoomList() {
+        return fetch(contextPath + 'demo/data/room-list.json')
+            .then((res) => res.json())
+            .then((d) => d.data);
+    }
 }

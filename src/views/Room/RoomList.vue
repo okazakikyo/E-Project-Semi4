@@ -29,6 +29,7 @@ const orderlistValue = ref([
 ]);
 
 const dataviewValue = ref(null);
+const roomList = ref(null);
 const layout = ref('grid');
 const sortKey = ref(null);
 const sortOrder = ref(null);
@@ -38,13 +39,34 @@ const sortOptions = ref([
     { label: 'Price Low to High', value: 'price' }
 ]);
 
+const sortSlot = ref([
+    { label: 'Slot High to Low', value: '!capacity' },
+    { label: 'Slot Low to High', value: 'capacity' }
+])
+
 const productService = new ProductService();
 
 onMounted(() => {
     productService.getProductsSmall().then((data) => (dataviewValue.value = data));
+    productService.getRoomList().then((data) => (roomList.value = data));
 });
 
 const onSortChange = (event) => {
+    const value = event.value.value;
+    const sortValue = event.value;
+
+    if (value.indexOf('!') === 0) {
+        sortOrder.value = -1;
+        sortField.value = value.substring(1, value.length);
+        sortKey.value = sortValue;
+    } else {
+        sortOrder.value = 1;
+        sortField.value = value;
+        sortKey.value = sortValue;
+    }
+};
+
+const onSortSlot = (event) => {
     const value = event.value.value;
     const sortValue = event.value;
 
@@ -117,6 +139,68 @@ const onSortChange = (event) => {
                                 <div class="flex align-items-center justify-content-between">
                                     <span class="text-2xl font-semibold">${{ slotProps.data.price }}</span>
                                     <Button icon="pi pi-book" :disabled="slotProps.data.inventoryStatus === 'OUTOFSTOCK'"></Button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </DataView>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <h5>DataView</h5>
+                <DataView :value="roomList" :layout="layout" :paginator="true" :rows="9" :sortOrder="sortOrder" :sortField="sortField">
+                    <template #header>
+                        <div class="grid grid-nogutter">
+                            <div class="col-6 text-left">
+                                <Dropdown v-model="sortKey" :options="sortSlot" optionLabel="label" placeholder="Sort By Slot" @change="onSortSlot($event)" />
+                            </div>
+                            <div class="col-6 text-right">
+                                <DataViewLayoutOptions v-model="layout" />
+                            </div>
+                        </div>
+                    </template>
+                    <template #list="slotProps">
+                        <div class="col-12">
+                            <div class="flex flex-column md:flex-row align-items-center p-3 w-full">
+                                <img :src="contextPath + 'demo/images/product/' + slotProps.data.image" :alt="slotProps.data.name" class="my-4 md:my-0 w-9 md:w-10rem shadow-2 mr-5" />
+                                <div class="flex-1 text-center md:text-left">
+                                    <div class="font-bold text-2xl">{{ slotProps.data.name }}</div>
+                                    <div class="mb-3">{{ slotProps.data.description }}</div>
+                                    <div class="flex align-items-center">
+                                        <i class="pi pi-tag mr-2"></i>
+                                    </div>
+                                </div>
+                                <div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
+                                    <span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">{{ slotProps.data.capacity }} slots</span>
+                                    <Button icon="pi pi-book" label="Booking" :disabled="slotProps.data.active === 0" class="mb-2"></Button>
+                                    <span :class="'product-badge status-' + (slotProps.data.active ? 'instock' : 'outofstock')">
+                                        {{ slotProps.data.active ? 'Active' : 'Deactive' }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template #grid="slotProps">
+                        <div class="col-12 md:col-4">
+                            <div class="card m-3 border-1 surface-border">
+                                <div class="flex align-items-center justify-content-between">
+                                    <div class="flex align-items-center">
+                                        <i class="pi pi-tag mr-2"></i>
+                                    </div>
+                                    <span :class="'product-badge status-' + (slotProps.data.active ? 'instock' : 'outofstock')">
+                                        {{ slotProps.data.active ? 'Active' : 'Deactive' }}
+                                    </span>
+                                </div>
+                                <div class="text-center">
+                                    <img :src="contextPath + 'demo/images/product/' + slotProps.data.image" :alt="slotProps.data.name" class="w-9 shadow-2 my-3 mx-0" />
+                                    <div class="text-2xl font-bold">{{ slotProps.data.name }}</div>
+                                    <div class="mb-3">{{ slotProps.data.description }}</div>
+                                </div>
+                                <div class="flex align-items-center justify-content-between">
+                                    <span class="text-2xl font-semibold">{{ slotProps.data.capacity }} slots</span>
+                                    <Button icon="pi pi-book" :disabled="slotProps.data.active === 0"></Button>
                                 </div>
                             </div>
                         </div>

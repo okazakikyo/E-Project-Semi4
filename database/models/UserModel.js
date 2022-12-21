@@ -72,3 +72,15 @@ export const checkLogin = (data, result) => {
         }
     })
 }
+
+export const staffListManage = (result) => {
+    db.query('SELECT User.UserName, Staff.Name, Staff.Phone, Staff.BirthDay, Staff.Address, Staff.CreateAt, Staff.Image FROM Staff join User on Staff.ID = User.StaffID', (err, res) => {
+        if(err) {
+            console.log(err);
+            result(err, null)
+            return;
+        } else {
+            result(null, res);
+        }
+    })
+}

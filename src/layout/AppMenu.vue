@@ -147,7 +147,7 @@ const handleSignOut = () => {
             <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
             <li v-if="item.separator" class="menu-separator"></li>
         </template>
-        <div class="logout" @click="handleSignOut()">
+        <div tabindex="0" class="logout" @click="handleSignOut()">
             <i class="pi pi-fw pi-sign-in layout-menuitem-icon mr-2"></i>
             <span class="text-menu">Logout</span>
         </div>
@@ -165,6 +165,15 @@ const handleSignOut = () => {
     padding: 0.75rem 1rem;
     border-radius: 12px;
     transition: background-color 0.2s, box-shadow 0.2s;
+    &:hover{
+        background-color: var(--surface-hover);
+    }
+    &:focus{
+        outline: 0 none;
+        outline-offset: 0;
+        transition: box-shadow 0.2s;
+        box-shadow: inset var(--focus-ring);
+    }
 }
 .text-menu{
     font-size: 12px;

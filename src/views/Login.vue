@@ -43,8 +43,7 @@
                   class="pi pi-exclamation-triangle mr-3"
                   style="font-size: 2rem"
                 />
-                <span>Username or password is required</span>
-                <span>Invalid username or password! Please check again!</span>
+                <span>{{ errMsg }}</span>
               </div>
               <template #footer>
                 <Button
@@ -207,6 +206,7 @@ export default defineComponent({
         this.$router.push({ name: "Dashboard" });
       })
       .catch((error) => {
+        this.displayConfirmation = true;
         switch (error.code) {
           case "auth/invalid-email":
             this.errMsg = "Invalid email"

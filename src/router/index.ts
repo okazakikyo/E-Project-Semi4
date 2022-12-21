@@ -58,7 +58,7 @@ const routes = [
       {
         path: '/calendar',
         name: 'Calendar',
-        component: () => import('@/components/Calendar.vue')
+        component: () => import('@/components/CalendarTest.vue')
       },
       {
         path: '/calendar-demo',

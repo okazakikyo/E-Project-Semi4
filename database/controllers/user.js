@@ -1,7 +1,17 @@
-import { getUser, getUserById, insertUser, checkLogin } from '../models/UserModel.js'
+import { getUser, getUserById, insertUser, checkLogin, staffListManage } from '../models/UserModel.js'
 
 export const showUser = (req, res) => {
     getUser((err, result) => {
+        if(err) {
+            res.send(err)
+        } else {
+            res.json(result)
+        }
+    })
+}
+
+export const showStaffManage = (req, res) => {
+    staffListManage((err, result) => {
         if(err) {
             res.send(err)
         } else {

@@ -24,6 +24,12 @@ export default class CustomerService {
             .then((d) => d.data);
     }
 
+    getTraineeList() {
+        return fetch(contextPath + 'demo/data/trainee-list.json')
+            .then((res) => res.json())
+            .then((d) => d.data);
+    }
+
     getCustomers(params) {
         const queryParams = Object.keys(params)
             .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))

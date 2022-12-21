@@ -31,6 +31,7 @@ declare module '@vue/runtime-core' {
     BNavItemDropdown: typeof import('bootstrap-vue-3')['BNavItemDropdown']
     Calendar: typeof import('./src/components/Calendar.vue')['default']
     CalendarDemo: typeof import('./src/components/CalendarDemo.vue')['default']
+    CalendarTest: typeof import('./src/components/CalendarTest.vue')['default']
     DocsExample: typeof import('./src/components/DocsExample.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     InputComponent: typeof import('./src/components/InputComponent.vue')['default']

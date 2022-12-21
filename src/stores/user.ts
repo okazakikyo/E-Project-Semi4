@@ -13,6 +13,7 @@ export type RootState = {
   user: {},
   postList: {},
   userList: {},
+  staffList: {},
 };
 
 export const useUserStore = defineStore({
@@ -22,6 +23,7 @@ export const useUserStore = defineStore({
       user: {},
       postList: {},
       userList: {},
+      staffList: {},
     } as RootState),
     actions: {
       setUserSchedule(scheduleList: UserSchedule) {
@@ -55,6 +57,19 @@ export const useUserStore = defineStore({
           return this.userList
         } catch(e) {
           storeError.setError(e)
+        }
+      },
+      async getStaffManage() {
+        const storeError = useErrorStore();
+        try {
+          const response = await api.get<GenericResponse>(
+            'staff-list'
+          )
+          this.staffList = response.data
+          console.log(response.data)
+          return this.staffList
+        } catch (error) {
+          storeError.setError(error)
         }
       }
     },
