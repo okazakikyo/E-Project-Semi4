@@ -24,10 +24,4 @@ export default class ProductService {
             .then((res) => res.json())
             .then((d) => d.data);
     }
-
-    getBookingList() {
-        return fetch(contextPath + 'demo/data/booking-list.json')
-            .then((res) => res.json())
-            .then((d) => d.data);
-    }
 }

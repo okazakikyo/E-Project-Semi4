@@ -206,26 +206,32 @@ import CustomerService from "@/service/CustomerService";
 import ProductService from "@/service/ProductService";
 import { ref, onBeforeMount } from "vue";
 import { useLayout } from "@/layout/composables/layout";
+import { useUserStore } from "@/stores/user";
+import { mapActions } from "pinia";
 
 const { contextPath } = useLayout();
 
 const loading2 = ref(null);
 const products = ref(null);
-const bookingList = ref(null);
+const bookingList = ref({});
 const expandedRows = ref([]);
 const displayModal = ref(false);
 const roomDetails = ref({});
 
+const listBooking = mapActions(useUserStore, ['getBookingList'])
+
 const productService = new ProductService();
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
   productService
     .getProductsWithOrdersSmall()
     .then((data) => (products.value = data));
 
-  productService
-    .getBookingList()
-    .then((data) => (bookingList.value = data));
+  try {
+    bookingList.value = await listBooking.getBookingList()
+  } catch (error) {
+    console.log(error)
+  }
   
   loading2.value = false;
 

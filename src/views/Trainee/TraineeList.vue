@@ -1,5 +1,4 @@
 <template>
-    {{ traineeList.staffList() }}
 <div class="grid">
     <div class="col-12">
             <div class="card">
@@ -84,13 +83,9 @@ const products = ref(null);
 const expandedRows = ref([]);
 const userDetails = ref({});
 const displayModal = ref(false);
-const TraineeName = ref([]);
 
 const customerService = new CustomerService();
 const productService = new ProductService();
-
-const listGet = mapActions(useUserStore, ['getStaffManage'])
-const traineeList = mapState(useUserStore, ['staffList'])
 
 onBeforeMount(() => {
     productService.getProductsWithOrdersSmall().then((data) => (products.value = data));
@@ -98,16 +93,8 @@ onBeforeMount(() => {
     customerService.getTraineeList().then((data) => (listStaffTrainee.value = data));
     loading2.value = false;
 
-    groupNameTrainee();
     initFilters1();
 });
-
-const groupNameTrainee = async () => {
-    await listGet.getStaffManage();
-    const list = traineeList.staffList()
-    const traineeName = _.groupBy(list, 'Name')
-    TraineeName.value = traineeName
-}
 
 const initFilters1 = () => {
     filters1.value = {

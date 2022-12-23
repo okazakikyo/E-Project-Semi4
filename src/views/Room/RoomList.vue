@@ -5,9 +5,11 @@ import { useLayout } from '@/layout/composables/layout';
 import { useUserStore } from '@/stores/user';
 import { mapActions, mapState } from 'pinia';
 import { useLoading } from "vue-loading-overlay";
+import { useToast } from "primevue/usetoast";
 
 const { contextPath } = useLayout();
 
+const toast = useToast();
 const roomList = ref(null);
 const layout = ref('grid');
 const sortKey = ref(null);
@@ -56,7 +58,6 @@ const roomDetails = async (id) => {
     const loader = $loading.show({});
     displayModal.value = true
     roomData.value = await roomMethod.getRoomById(id)
-    console.log(roomData.value)
     loader.hide();
 }
 
@@ -65,14 +66,16 @@ const updateRoom = async (id, data) => {
     const loader = $loading.show({});
     await roomMethod.updateRoom(id ,data);
     displayModal.value = false
+    toast.add({severity:'success', summary: 'Success Message', detail:'Save change success', life: 3000});
+    await roomMethod.getRoomList();
     loader.hide();
-    location.reload();
 }
 
 </script>
 
 <template>
     <div class="grid">
+        <Toast/>
         <div class="col-12">
             <div class="card">
                 <h5>Room List</h5>

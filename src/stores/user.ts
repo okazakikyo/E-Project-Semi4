@@ -55,22 +55,9 @@ export const useUserStore = defineStore({
           const response = await api.get<GenericResponse>(
             'user'
           )
-          this.userList = response.data
-          return this.userList
+          return response.data
         } catch(e) {
           storeError.setError(e)
-        }
-      },
-      async getStaffManage() {
-        const storeError = useErrorStore();
-        try {
-          const response = await api.get<GenericResponse>(
-            'staff-list'
-          )
-          this.staffList = response.data
-          return this.staffList
-        } catch (error) {
-          storeError.setError(error)
         }
       },
       async createRoom(room : any) {
@@ -114,6 +101,26 @@ export const useUserStore = defineStore({
           return res.data
         } catch (error) {
           console.log(error)
+        }
+      },
+      async getBookingList() {
+        try {
+          const res = await api.get<GenericResponse>(
+            'booking-list'
+          )
+          return res.data
+        } catch (error) {
+          
+        }
+      },
+      async getUserList() {
+        try {
+          const res = await api.get<GenericResponse>(
+            'staff'
+          )
+          return res.data
+        } catch (error) {
+          
         }
       },
     },

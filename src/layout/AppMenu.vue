@@ -143,10 +143,13 @@ const handleSignOut = () => {
 
 <template>
     <ul class="layout-menu">
-        <template v-for="(item, i) in model" :key="item">
-            <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
-            <li v-if="item.separator" class="menu-separator"></li>
-        </template>
+        <div>
+            <template v-for="(item, i) in model" :key="item">
+                {{ item.separator }}
+                <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
+                <li v-if="item.separator" class="menu-separator"></li>
+            </template>
+        </div>
         <div tabindex="0" class="logout" @click="handleSignOut()">
             <i class="pi pi-fw pi-sign-in layout-menuitem-icon mr-2"></i>
             <span class="text-menu">Logout</span>

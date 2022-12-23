@@ -1,6 +1,7 @@
 <template>
     <div class="card">
         <Form @submit="onSubmit">
+            <Toast />
             <h5>Float Label</h5>
             <div class="grid p-fluid mt-3">
                 <div class="field col-12 md:col-4">
@@ -42,15 +43,29 @@
                 </div>
                 <div class="field col-12 md:col-4">
                     <span class="p-float-label">
-                        <Calendar inputId="calendar" v-model="roomInfo.createdAt" :maxDate="maxDate"></Calendar>
-                        <label for="calendar">Start Date</label>
+                        <Field
+                            type="text"
+                            rules="required"
+                            name="start_date"
+                            v-slot="{ field, meta }">
+                            <Calendar inputId="calendar" v-bind="field" :class="{ 'p-invalid': !meta.valid && meta.touched }" v-model="roomInfo.createdAt" :maxDate="maxDate"></Calendar>
+                            <label for="calendar">Start Date</label>
+                        </Field>
                     </span>
+                    <ErrorMessage class="p-error" :name="'start_date'"></ErrorMessage>
                 </div>
                 <div class="field col-12 md:col-4">
                     <span class="p-float-label">
-                        <Calendar inputId="calendar" v-model="roomInfo.end_date" :minDate="minDate"></Calendar>
-                        <label for="calendar">End Date</label>
+                        <Field
+                            type="text"
+                            rules="required"
+                            name="end_date"
+                            v-slot="{ field, meta }">
+                            <Calendar inputId="calendar" v-bind="field" :class="{ 'p-invalid': !meta.valid && meta.touched }" v-model="roomInfo.end_date" :minDate="minDate"></Calendar>
+                            <label for="calendar">End Date</label>
+                        </Field>
                     </span>
+                    <ErrorMessage class="p-error" :name="'end_date'"></ErrorMessage>
                 </div>
                 <div class="field col-12 md:col-4">
                     <span class="p-float-label">
@@ -77,49 +92,22 @@ import { ref, onMounted } from 'vue';
 import CountryService from '@/service/CountryService';
 import { useUserStore } from '@/stores/user'
 import { mapActions } from 'pinia';
+import { useToast } from "primevue/usetoast";
 import { Field, Form, ErrorMessage } from "vee-validate";
+import { useRouter } from "vue-router";
+import moment from 'moment';
 
-const countries = ref([]);
-const cities = ref([
-    { name: 'Active', code: 'AC' },
-    { name: 'Closed', code: 'CL' },
-]);
+const toast = useToast();
 const filteredCountries = ref(null);
 const checked1 = ref(true);
 const maxDate = ref(new Date());
 const minDate = ref(new Date());
-const value1 = ref(null);
-const value2 = ref(null);
-const value3 = ref(null);
-const value4 = ref(null);
-const value5 = ref(null);
-const value6 = ref(null);
-const value7 = ref(null);
-const value8 = ref(null);
-const value9 = ref(null);
-const value10 = ref(null);
 const roomInfo = ref({});
 const countryService = new CountryService();
 const previewImage = ref(null);
 const fileInput = ref(null);
 const emit = defineEmits(['input'])
-
-onMounted(() => {
-    countryService.getCountries().then((data) => (countries.value = data));
-});
-
-const searchCountry = (event) => {
-    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-    const filtered = [];
-    const query = event.query;
-    for (let i = 0; i < countries.value.length; i++) {
-        const country = countries.value[i];
-        if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-            filtered.push(country);
-        }
-    }
-    filteredCountries.value = filtered;
-};
+const router = useRouter();
 
 const pickFile = () => {
     let input = fileInput
@@ -141,12 +129,18 @@ const selectImage = () => {
 
 const onSubmit = async () => {
     roomInfo.value.active = checked1 ? 1 : 0;
+    roomInfo.value.createdAt = moment(roomInfo.value.createdAt).format('YYYY-MM-DD')
+    roomInfo.value.end_date = moment(roomInfo.value.end_date).format('YYYY-MM-DD')
+    console.log(roomInfo.value.createdAt)
+    console.log(roomInfo.value.end_date)
     const createNew = mapActions(useUserStore, ['createRoom'])
     try {
         createNew.createRoom(roomInfo.value)
     } catch (e) {
         console.log(e)
     }
+    toast.add({severity:'success', summary:'Success Message', detail:'Create room success', life: 2000})
+    setTimeout(() => router.push({ name: 'RoomList' }), 2000)
 }
 </script>
 <style lang="scss" scoped>
