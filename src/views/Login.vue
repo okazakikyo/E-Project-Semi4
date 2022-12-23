@@ -169,7 +169,7 @@ import AppConfig from "@/layout/AppConfig.vue";
 import InputComponent from "@/components/InputComponent.vue";
 import { useLoading } from "vue-loading-overlay";
 import { mapActions, mapState } from "pinia";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 export default defineComponent({
   setup() {

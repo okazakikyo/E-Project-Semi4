@@ -14,6 +14,7 @@ export type RootState = {
   postList: {},
   userList: {},
   staffList: {},
+  roomList: {},
 };
 
 export const useUserStore = defineStore({
@@ -24,6 +25,7 @@ export const useUserStore = defineStore({
       postList: {},
       userList: {},
       staffList: {},
+      roomList: {},
     } as RootState),
     actions: {
       setUserSchedule(scheduleList: UserSchedule) {
@@ -66,11 +68,53 @@ export const useUserStore = defineStore({
             'staff-list'
           )
           this.staffList = response.data
-          console.log(response.data)
           return this.staffList
         } catch (error) {
           storeError.setError(error)
         }
-      }
+      },
+      async createRoom(room : any) {
+        try {
+          const res = await api.post<GenericResponse>(
+            'room-list',
+            room
+          )
+          return res.data
+        } catch (error) {
+          console.log(error)
+        }
+      },
+      async getRoomList() {
+        try {
+          const res = await api.get<GenericResponse>(
+            'room-list',
+          )
+          this.roomList = res.data
+          return this.roomList
+        } catch (error) {
+          console.log(error)
+        }
+      },
+      async getRoomById(roomId: any) {
+        try {
+          const res = await api.get<GenericResponse>(
+            `room-list/${roomId}`,
+          )
+          return res.data
+        } catch (error) {
+          console.log(error)
+        }
+      },
+      async updateRoom(roomId: any, room: any) {
+        try {
+          const res = await api.put<GenericResponse>(
+            `room-list/${roomId}`,
+            room
+          )
+          return res.data
+        } catch (error) {
+          console.log(error)
+        }
+      },
     },
 })

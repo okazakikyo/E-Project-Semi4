@@ -19,6 +19,8 @@ configure({
                 userName: "User Name",
                 password: "Password",
                 password_conifrm: "Password confirm",
+                roomName: "Room name",
+                capacity: "Capacity",
             }
         }
     })
