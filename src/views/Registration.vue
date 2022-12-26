@@ -42,8 +42,7 @@
                   class="pi pi-exclamation-triangle mr-3"
                   style="font-size: 2rem"
                 />
-                <span>Username or password is required</span>
-                <span>Invalid username or password! Please check again!</span>
+                <span>{{ errors }}</span>
               </div>
               <template #footer>
                 <Button
@@ -172,11 +171,13 @@
   <script lang="ts">
 import { defineComponent } from "vue";
 import { useUserStore } from "@/stores/user";
+import { useErrorStore } from "@/stores/errors";
 import type { UserLogin } from "@/http/type";
 import { Field, Form, ErrorMessage } from "vee-validate";
 import AppConfig from "@/layout/AppConfig.vue";
 import InputComponent from "@/components/InputComponent.vue";
-import { getAuth, createUserWithEmailAndPassword, UserCredential, sendEmailVerification, onAuthStateChanged } from 'firebase/auth'
+import { mapActions, mapState } from "pinia";
+// import { getAuth, createUserWithEmailAndPassword, UserCredential, sendEmailVerification, onAuthStateChanged } from 'firebase/auth'
 
 export default defineComponent({
   setup() {
@@ -198,16 +199,26 @@ export default defineComponent({
     AppConfig,
     InputComponent,
   },
+  computed: {
+    ...mapState(useErrorStore, ['errors'])
+  },
   methods: {
+    ...mapActions(useUserStore, ['register']),
     async onSubmit() {
-      await createUserWithEmailAndPassword(getAuth(), this.userInfo.email, this.userInfo.password)
-      .then((data) => {
-        alert('Registration successful')
-        this.$router.push({ name: "Login" });
-      })
-      .catch((error) => {
-        alert(error.message)
-      })
+      // await createUserWithEmailAndPassword(getAuth(), this.userInfo.email, this.userInfo.password)
+      // .then((data) => {
+      //   alert('Registration successful')
+      //   this.$router.push({ name: "Login" });
+      // })
+      // .catch((error) => {
+      //   alert(error.message)
+      // })
+      await this.register(this.userInfo)
+        if(!this.errors) {
+          this.$router.push({ name: 'Home' })
+        } else {
+          this.displayConfirmation = true
+        }
     },
     closeConfirmation() {
       this.displayConfirmation = false;

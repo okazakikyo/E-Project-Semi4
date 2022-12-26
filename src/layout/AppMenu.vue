@@ -1,12 +1,13 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import { getAuth, signOut } from 'firebase/auth';
+import { onMounted, ref, onBeforeMount } from 'vue';
+// import { getAuth, signOut } from 'firebase/auth';
+import { useUserStore } from '@/stores/user';
 import router from '@/router';
 
 import AppMenuItem from './AppMenuItem.vue';
+import { mapActions, mapState } from 'pinia';
 
 const isLoggedIn = ref(false);
-
 const model = ref([
     {
         label: 'Home',
@@ -134,10 +135,12 @@ const model = ref([
     },
 ]);
 const handleSignOut = () => {
-    let auth = getAuth()
-    signOut(auth).then(() => {
-        router.push("/login")
-    })
+    // let auth = getAuth()
+    // signOut(auth).then(() => {
+    //     router.push("/login")
+    // })
+    localStorage.removeItem("user");
+    router.push("/login")
 }
 </script>
 

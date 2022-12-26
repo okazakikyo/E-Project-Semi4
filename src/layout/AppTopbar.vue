@@ -7,6 +7,9 @@ import {
 } from "vue";
 import { useLayout } from "@/layout/composables/layout";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/user";
+import { mapState } from "pinia";
+import moment from 'moment';
 
 const { layoutConfig, onMenuToggle, contextPath } = useLayout();
 
@@ -15,9 +18,11 @@ const topbarMenuActive = ref(false);
 const editProfile = ref(false);
 const enableEdit = ref(false);
 const router = useRouter();
+const user = ref({});
 
 onMounted(() => {
   bindOutsideClickListener();
+  user.value = JSON.parse(localStorage.getItem('user'))
 });
 
 onBeforeUnmount(() => {
@@ -141,16 +146,16 @@ const isOutsideClicked = (event) => {
                 <div class="card p-fluid">
                 <h5>Profile</h5>
                 <div class="field">
-                    <label for="name1">Name</label>
-                    <InputText id="name1" type="text"/>
+                    <label for="name1"></label>
+                    <InputText id="name1" type="text" v-model="user.user.staff_id.name"/>
                 </div>
                 <div class="field">
                     <label for="email1">Email</label>
-                    <InputText id="email1" type="text" />
+                    <InputText id="email1" type="text" readonly v-model="user.user.email"/>
                 </div>
                 <div class="field">
                     <label for="age1">Age</label>
-                    <InputText id="age1" type="text" />
+                    <InputText id="age1" type="text" :value="moment().format('YYYY') - moment(user.user.staff_id.birthday).format('YYYY')" readonly/>
                 </div>
             </div>
             </slot>
@@ -159,15 +164,15 @@ const isOutsideClicked = (event) => {
                 <h5>Profile</h5>
                 <div class="field">
                     <label for="name1">Name</label>
-                    <InputText readonly id="name1" type="text" value="Name user" />
+                    <InputText readonly id="name1" type="text" :value="user.user.staff_id.name" />
                 </div>
                 <div class="field">
                     <label for="email1">Email</label>
-                    <InputText readonly id="email1" type="text" value="Email user"/>
+                    <InputText readonly id="email1" type="text" :value="user.user.email"/>
                 </div>
                 <div class="field">
                     <label for="age1">Age</label>
-                    <InputText readonly id="age1" type="text" value="Age User" />
+                    <InputText readonly id="age1" type="text" :value="moment().format('YYYY') - moment(user.user.staff_id.birthday).format('YYYY')" />
                 </div>
             </div>
             </slot>

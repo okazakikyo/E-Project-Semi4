@@ -15,6 +15,7 @@ export type RootState = {
   userList: {},
   staffList: {},
   roomList: {},
+  loginData: {},
 };
 
 export const useUserStore = defineStore({
@@ -26,6 +27,7 @@ export const useUserStore = defineStore({
       userList: {},
       staffList: {},
       roomList: {},
+      loginData: {},
     } as RootState),
     actions: {
       setUserSchedule(scheduleList: UserSchedule) {
@@ -41,21 +43,49 @@ export const useUserStore = defineStore({
             'login',
             user
           )
-          console.log(response)
-          this.user = response
-          return this.user
+          localStorage.setItem('user', JSON.stringify(response.data))
+          this.loginData = JSON.parse(localStorage.getItem('user'))
+          return this.loginData
         }catch(e) {
-          console.log(e)
-          storeError.setError(e)
+          if(e.response.status == 400) {
+            storeError.setError("Invalid email or password!")
+          } else {
+            storeError.setError(e.message)
+          }
         }
       },
-      async getUser() {
+      async register(user: any) {
+        const storeError = useErrorStore();
+        try {
+          const response = await api.post<GenericResponse>(
+            'register',
+            user
+          )
+          localStorage.setItem('user', JSON.stringify(response.data))
+        }catch(e) {
+          storeError.setError(e.message)
+        }
+      },
+      async getUser(userId: any) {
         const storeError = useErrorStore();
         try {
           const response = await api.get<GenericResponse>(
-            'user'
+            `users/${userId}`,
+            
           )
           return response.data
+        } catch(e) {
+          storeError.setError(e)
+        }
+      },
+      async getListUser() {
+        const storeError = useErrorStore();
+        try {
+          const res = await api.get<GenericResponse>(
+            'users'
+          )
+          this.user = res.data
+          return this.user
         } catch(e) {
           storeError.setError(e)
         }

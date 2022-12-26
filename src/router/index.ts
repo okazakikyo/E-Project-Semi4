@@ -4,22 +4,23 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AppLayout from '@/layout/AppLayout.vue';
 import Error from '@/views/Error.vue';
 const Login = () => import("@/views/Login.vue");
-import { getAuth, onAuthStateChanged, UserCredential } from 'firebase/auth';
+// import { getAuth, onAuthStateChanged, UserCredential } from 'firebase/auth';
 
-const getCurrentUser = () => {
-  return new Promise((resolve, reject) => {
-    const removeListener = onAuthStateChanged(
-      getAuth(),
-      (user) => {
-        removeListener();
-        resolve(user)
-      },
-      reject
-    )
-  })
-}
+// const getCurrentUser = () => {
+//   return new Promise((resolve, reject) => {
+//     const removeListener = onAuthStateChanged(
+//       getAuth(),
+//       (user) => {
+//         removeListener();
+//         resolve(user)
+//       },
+//       reject
+//     )
+//   })
+// }
 const ifNotAuthenticated = async (to: any, from: any, next: any) => {
-     if(await getCurrentUser()) {
+  const userInfo: any = JSON.parse(localStorage.getItem("user"));
+     if(userInfo) {
         next("/")
      } else{
         if (to.path === "/") {
@@ -28,6 +29,15 @@ const ifNotAuthenticated = async (to: any, from: any, next: any) => {
         next()
      }
 }
+
+const ifAuthenticated = (async (to: any, from: any, next: any) => {
+  const userInfo: any = JSON.parse(localStorage.getItem("user"));
+    if(userInfo) {
+      next()
+    } else{
+      next('/login')
+    }
+});
 
 const routes = [
   {
@@ -46,9 +56,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: AppLayout,
-    meta: {
-      requiresAuth: true,
-    },
+    beforeEnter: ifAuthenticated,
     children: [
       {
         path: '/',
@@ -109,16 +117,17 @@ const router = createRouter({
   },
 })
 
-router.beforeEach(async (to, from, next) => {
-  if(to.matched.some((record) => record.meta.requiresAuth)) {
-    if(await getCurrentUser()) {
-      next()
-    } else{
-      next('/login')
-    }
-  } else {
-    next()
-  }
-});
+// router.beforeEach(async (to, from, next) => {
+//   const userInfo: any = JSON.parse(localStorage.getItem("user"));
+  // if(to.matched.some((record) => record.meta.requiresAuth)) {
+  //   if(await getCurrentUser()) {
+  //     next()
+  //   } else{
+  //     next('/login')
+  //   }
+  // } else {
+  //   next()
+  // }
+// });
 
 export default router

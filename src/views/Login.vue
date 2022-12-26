@@ -43,7 +43,7 @@
                   class="pi pi-exclamation-triangle mr-3"
                   style="font-size: 2rem"
                 />
-                <span>{{ errMsg }}</span>
+                <span>{{ errors }}</span>
               </div>
               <template #footer>
                 <Button
@@ -69,7 +69,7 @@
               >
               <v-field
                 type="text"
-                rules="required"
+                rules="required|email"
                 name="userName"
                 v-slot="{ field, meta }"
               >
@@ -200,28 +200,34 @@ export default defineComponent({
     async onSubmit() {
       const $loading = useLoading();
       const loader = $loading.show({});
-      const auth = getAuth()
-      signInWithEmailAndPassword(auth, this.userInfo.email, this.userInfo.password)
-      .then((data) => {
+      // const auth = getAuth()
+      // signInWithEmailAndPassword(auth, this.userInfo.email, this.userInfo.password)
+      // .then((data) => {
+      //   this.$router.push({ name: "Dashboard" });
+      // })
+      // .catch((error) => {
+      //   this.displayConfirmation = true;
+      //   switch (error.code) {
+      //     case "auth/invalid-email":
+      //       this.errMsg = "Invalid email"
+      //       break;
+      //     case "auth/user-not-found":
+      //       this.errMsg = "User not found"
+      //       break;
+      //     case "auth/wrong-password":
+      //       this.errMsg = "Wrong password"
+      //       break;
+      //     default:
+      //       this.errMsg = "Email or password is incorrect"
+      //       break;
+      //   }
+      // })
+      await this.login(this.userInfo)
+      if(!this.errors) {
         this.$router.push({ name: "Dashboard" });
-      })
-      .catch((error) => {
-        this.displayConfirmation = true;
-        switch (error.code) {
-          case "auth/invalid-email":
-            this.errMsg = "Invalid email"
-            break;
-          case "auth/user-not-found":
-            this.errMsg = "User not found"
-            break;
-          case "auth/wrong-password":
-            this.errMsg = "Wrong password"
-            break;
-          default:
-            this.errMsg = "Email or password is incorrect"
-            break;
-        }
-      })
+      } else {
+        this.displayConfirmation = true
+      }
       loader.hide();
     },
     closeConfirmation() {

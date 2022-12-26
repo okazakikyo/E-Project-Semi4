@@ -1,8 +1,191 @@
 {
+  "users": [
+    {
+      "username": "test",
+      "email": "test@gmail.com",
+      "password": "$2a$10$/1kCHU8Yl08SeRnLzfZZwetonr8mLuk31uFbXS2GXCDXluvepnx7q",
+      "isDelete": 0,
+      "id": 1002,
+      "staff_id": {
+        "id": 1002,
+        "name": "Admin",
+        "email": "admin@gmail.com",
+        "phone": "01234567891",
+        "birthday": "1995-05-25",
+        "address": "cmt 580",
+        "image": "",
+        "bank_id": "",
+        "createAt": "2022-12-26",
+        "isDelete": 0
+      },
+      "createAt": "2022-12-26",
+      "role": "admin"
+    },
+    {
+      "email": "Johncc@mail.com",
+      "password": "$2a$10$ZreppnU6WDHGcz5hIjXS0uE0RsreAp8C49HW0CgsfnPsf.W0Y5Rlu",
+      "id": 1001,
+      "usename": "jonhtt",
+      "role": "user",
+      "staff_id": {
+          "id": 1000,
+          "name": "John",
+          "email": "Johncc@mail.com",
+          "phone": "01234567891",
+          "birthday": "1991-05-19",
+          "address": "abc 580",
+          "image": "",
+          "bank_id": "",
+          "createAt": "2022-12-19",
+          "isDelete": 0
+      },
+      "createAt": "2022-12-16",
+      "isDelete": 0
+    },
+    {
+      "email": "Jamesbutt@mail.com",
+      "password": "$2a$10$WTRNNP3zPo75fpymSIfYv.4ezkQGeT7W7dCvc1ppb1XgyRWoQEf6C",
+      "id": 1000,
+      "usename": "jamesbutt",
+      "role": "hr",
+      "staff_id": {
+          "id": 1000,
+          "name": "James Butt",
+          "email": "Jamesbutt@mail.com",
+          "phone": "01234567891",
+          "birthday": "1991-03-16",
+          "address": "abc 580",
+          "image": "",
+          "bank_id": "",
+          "createAt": "2022-12-16",
+          "isDelete": 0
+      },
+      "createAt": "2022-12-16",
+      "isDelete": 0
+    }
+  ],
+  "staff": [
+    {
+      "id": 1000,
+      "name": "James Butt",
+      "email": "Jamesbutt@mail.com",
+      "phone": "01234567891",
+      "birthday": "1991-03-16",
+      "address": "abc 580",
+      "image": "",
+      "bank_id": "",
+      "createAt": "2022-12-16",
+      "isDelete": 0
+    },
+    {
+      "id": 1001,
+      "name": "John",
+      "email": "Johncc@mail.com",
+      "phone": "01234567891",
+      "birthday": "1991-05-19",
+      "address": "abc 580",
+      "image": "",
+      "bank_id": "",
+      "createAt": "2022-12-19",
+      "isDelete": 0
+    },
+    {
+      "id": 1002,
+      "name": "Admin",
+      "email": "admin@gmail.com",
+      "phone": "01234567891",
+      "birthday": "1995-05-25",
+      "address": "cmt 580",
+      "image": "",
+      "bank_id": "",
+      "createAt": "2022-12-26",
+      "isDelete": 0
+    }
+  ],
+  "department": [
+    {
+      "id": 1000,
+      "department": "Admin",
+      "position": "admin",
+      "active": 1,
+      "createAt": "2022-12-19",
+      "isDelete": 0
+    },
+    {
+      "id": 1001,
+      "department": "User",
+      "position": "user",
+      "active": 1,
+      "createAt": "2022-12-20",
+      "isDelete": 0
+    }
+  ],
+  "staff_department": [
+    {
+      "id": 1000,
+      "staff_id": [
+        {
+          "id": 1000,
+          "name": "James Butt",
+          "email": "Jamesbutt@mail.com",
+          "phone": "01234567891",
+          "birthday": "1991-03-16",
+          "address": "abc 580",
+          "image": "",
+          "bank_id": "",
+          "createAt": "2022-12-16",
+          "isDelete": 0
+        }
+      ],
+      "department_id": [
+        {
+          "id": 1000,
+          "department": "Admin",
+          "position": "admin",
+          "active": 1,
+          "createAt": "2022-12-19",
+          "isDelete": 0
+        }
+      ],
+      "active": 1,
+      "createAt": "2022-12-10",
+      "isDelete": 0
+    },
+    {
+      "id": 1001,
+      "staff_id": [
+        {
+          "id": 1001,
+          "name": "John",
+          "email": "Johncc@mail.com",
+          "phone": "01234567891",
+          "birthday": "1991-05-19",
+          "address": "abc 580",
+          "image": "",
+          "bank_id": "",
+          "createAt": "2022-12-19",
+          "isDelete": 0
+        }
+      ],
+      "department_id": [
+        {
+          "id": 1001,
+          "department": "User",
+          "position": "user",
+          "active": 1,
+          "createAt": "2022-12-20",
+          "isDelete": 0
+        }
+      ],
+      "active": 1,
+      "createAt": "2022-12-15",
+      "isDelete": 0
+    }
+  ],
   "room-list": [
     {
       "id": 1000,
-      "name": "Room 102",
+      "name": "Room 104",
       "capacity": 50,
       "description": "meeting room",
       "image": "meeting-rooms.jpg",
@@ -60,12 +243,114 @@
       "id": 1005
     },
     {
+      "name": "test",
+      "capacity": "77",
+      "description": "qwdwq",
+      "createdAt": "2022-12-22T17:00:00.000Z",
+      "end_date": "2023-01-06T17:00:00.000Z",
+      "image": "Screen Shot 2022-12-23 at 10.53.15.png",
       "active": 1,
-      "id": 1006
+      "id": 1008
     },
     {
+      "name": "test1111",
+      "capacity": "123",
+      "description": "qwd",
+      "createdAt": "2022-11-30T17:00:00.000Z",
+      "end_date": "2022-12-30T17:00:00.000Z",
+      "image": "Screen Shot 2022-12-23 at 10.52.32.png",
       "active": 1,
-      "id": 1007
+      "id": 1009
+    },
+    {
+      "name": "test455",
+      "capacity": "11",
+      "description": "dqwwq",
+      "createdAt": "2022-12-02T17:00:00.000Z",
+      "end_date": "2022-12-30T17:00:00.000Z",
+      "image": "Screen Shot 2022-12-23 at 10.33.55.png",
+      "active": 1,
+      "id": 1010
+    },
+    {
+      "name": "qwdwq",
+      "capacity": "556",
+      "description": "wqd",
+      "createdAt": "2022-12-22T17:00:00.000Z",
+      "end_date": "2022-12-30T17:00:00.000Z",
+      "active": 1,
+      "id": 1011
+    },
+    {
+      "name": "gg",
+      "capacity": "232",
+      "description": "wqd",
+      "createdAt": "2022-12-22T17:00:00.000Z",
+      "end_date": "2022-12-30T17:00:00.000Z",
+      "active": 1,
+      "id": 1012
+    },
+    {
+      "name": "ggh",
+      "capacity": "2",
+      "description": "qwd",
+      "end_date": "2022-12-30T17:00:00.000Z",
+      "active": 1,
+      "id": 1013
+    },
+    {
+      "name": "as",
+      "capacity": "7",
+      "description": "wqd",
+      "createdAt": "2022-12-15T17:00:00.000Z",
+      "end_date": "2022-12-30T17:00:00.000Z",
+      "active": 1,
+      "id": 1014
+    },
+    {
+      "name": "kk",
+      "capacity": "2",
+      "description": "qwd",
+      "createdAt": "2022-12-01T17:00:00.000Z",
+      "end_date": "2022-12-23T17:00:00.000Z",
+      "active": 1,
+      "id": 1015
+    },
+    {
+      "name": "ggggq",
+      "capacity": "123",
+      "description": "wqd",
+      "createdAt": "2022-12-02T17:00:00.000Z",
+      "end_date": "2022-12-23T17:00:00.000Z",
+      "active": 1,
+      "id": 1016
+    },
+    {
+      "name": "gqwd",
+      "capacity": "123",
+      "description": "wqd",
+      "createdAt": "2022-12-01T17:00:00.000Z",
+      "end_date": "2022-12-30T17:00:00.000Z",
+      "active": 1,
+      "id": 1017
+    },
+    {
+      "name": "ttttasd",
+      "capacity": "1",
+      "description": "wqd",
+      "createdAt": "2022-12-09T17:00:00.000Z",
+      "end_date": "2022-12-23T07:28:03.453Z",
+      "active": 1,
+      "id": 1018
+    },
+    {
+      "createdAt": "2022-12-22",
+      "end_date": "2022-12-24",
+      "name": "jje",
+      "capacity": "1",
+      "description": "wd",
+      "active": 1,
+      "id": 1019
     }
   ],
   "booking-list": [

@@ -1,5 +1,4 @@
 <template>
-    {{ userList }}
     <div class="grid">
         <!-- <div class="col-12">
             <div class="card">
@@ -131,8 +130,7 @@
                 
             </div>
         </div> -->
-
-        <div class="col-12">
+        <div class="col-12" v-if="userList">
             <div class="card">
                 <h5>Filter Menu</h5>
                 <DataTable
@@ -147,7 +145,7 @@
                     :loading="loading1"
                     :filters="filters2"
                     responsiveLayout="scroll"
-                    :globalFilterFields="['name', 'address', 'email', 'birthday', 'bank_id', 'phone', 'isDelete']"
+                    :globalFilterFields="['name', 'address', 'email', 'birthday', 'bank_id', 'phone']"
                 >
                     <template #header>
                         <div class="flex justify-content-between flex-column sm:flex-row">
@@ -168,7 +166,7 @@
                             <InputText type="text" v-model="filterModel.value" class="p-column-filter" placeholder="Search by name" />
                         </template>
                     </Column>
-                    <Column header="Address" filterField="country.name" style="min-width: 12rem">
+                    <Column header="Address" filterField="address" style="min-width: 12rem">
                         <template #body="{ data }">
                             <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ data.address }}</span>
                         </template>
@@ -182,32 +180,18 @@
                             <Button type="button" icon="pi pi-check" @click="filterCallback()" class="p-button-success"></Button>
                         </template>
                     </Column>
-                    <Column header="Email" filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="min-width: 14rem">
+                    <Column header="Email" filterField="email" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="min-width: 14rem">
                         <template #body="{ data }">
                             <img :alt="data.image" :src="contextPath + 'demo/images/avatar/' + data.image" width="32" style="vertical-align: middle" />
                             <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ data.email }}</span>
                         </template>
-                        <template #filter="{ filterModel }">
-                            <div class="mb-3 text-bold">Agent Picker</div>
-                            <MultiSelect v-model="filterModel.value" :options="representatives" optionLabel="name" placeholder="Any" class="p-column-filter">
-                                <template #option="slotProps">
-                                    <div class="p-multiselect-representative-option">
-                                        <img :alt="slotProps.option.name" :src="contextPath + 'demo/images/avatar/' + slotProps.option.image" width="32" style="vertical-align: middle" />
-                                        <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ slotProps.option.name }}</span>
-                                    </div>
-                                </template>
-                            </MultiSelect>
-                        </template>
                     </Column>
-                    <Column header="BirthDay" filterField="date" dataType="date" style="min-width: 10rem">
+                    <Column header="BirthDay" filterField="birthday" dataType="date" style="min-width: 10rem">
                         <template #body="{ data }">
-                            {{ data.birthday }}
-                        </template>
-                        <template #filter="{ filterModel }">
-                            <Calendar v-model="filterModel.value" dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" />
+                            {{ moment(data.birthday).format('YYYY/MM/DD') }}
                         </template>
                     </Column>
-                    <Column header="Bank Id" filterField="balance" dataType="numeric" style="min-width: 10rem">
+                    <Column header="BankId" filterField="bank_id" style="min-width: 10rem">
                         <template #body="{ data }">
                             {{ data.bank_id }}
                         </template>
@@ -215,7 +199,7 @@
                             <InputText type="number" v-model="filterModel.value" />
                         </template>
                     </Column>
-                    <Column header="Phone number" filterField="balance" dataType="numeric" style="min-width: 10rem">
+                    <Column header="PhoneNumber" filterField="phone" style="min-width: 10rem">
                         <template #body="{ data }">
                             {{ data.phone }}
                         </template>
@@ -225,7 +209,7 @@
                     </Column>
                     <Column field="active" header="Active" dataType="boolean" bodyClass="text-center" style="min-width: 8rem">
                         <template #body="{ data }">
-                            <i class="pi" :class="{ 'text-green-500 pi-check-circle': data.isDelete, 'text-pink-500 pi-times-circle': !data.isDelete }"></i>
+                            <i class="pi" :class="{ 'text-green-500 pi-check-circle': !data.isDelete, 'text-pink-500 pi-times-circle': data.isDelete }"></i>
                         </template>
                         <template #filter="{ filterModel }">
                         <TriStateCheckbox v-model="filterModel.value" />
@@ -251,7 +235,7 @@
                 <InputText :value="userDetails.name" v-model="userDetails.name"/>
 
                 <label>Status</label>
-                <Dropdown v-model="userDetails.verified" :selected="selectedStatus" :options="statusList" optionLabel="name" optionValue="code" placeholder="Select a Status" />
+                <Dropdown v-model="userDetails.isDelete" :selected="selectedStatus" :options="statusList" optionLabel="name" optionValue="code" placeholder="Select a Status" />
             </div>
             <template #footer>
                 <Button label="No" icon="pi pi-times" @click="closeEdit" class="p-button-text"/>
@@ -265,10 +249,11 @@
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
 import CustomerService from '@/service/CustomerService';
 import ProductService from '@/service/ProductService';
-import { ref, onBeforeMount, onMounted } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
 import { useUserStore } from '@/stores/user'
 import { mapActions, mapState } from 'pinia';
+import moment from 'moment';
 
 const { contextPath } = useLayout();
 
@@ -277,18 +262,18 @@ const customer2 = ref(null);
 const customer3 = ref(null);
 const filters1 = ref(null);
 const filters2 = ref(null);
-const loading1 = ref(null);
+const loading1 = ref(true);
 const loading2 = ref(null);
 const idFrozen = ref(false);
 const products = ref(null);
 const expandedRows = ref([]);
 const userDetails = ref({});
 const selectedStatus = ref();
-const userList = ref({});
+const userList = ref(null);
 
 const statusList = ref([
-    {name: 'Active', code: true},
-    {name: 'Unactive', code: false},
+    {name: 'Active', code: false},
+    {name: 'Unactive', code: true},
 ])
 const displayModal = ref(false);
 const statuses = ref(['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal']);
@@ -320,6 +305,8 @@ onBeforeMount(async () => {
 
     try {
         userList.value = await storeUser.getUserList();
+        loading1.value = false;
+        userList.value.forEach((user) => (user.date = new Date(user.date)));
     } catch (error) {}
     initFilters1();
 });
@@ -343,7 +330,7 @@ const initFilters1 = () => {
         email : { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
         birthday: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
         bank_id : { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-        phone: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        phone: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
         isDelete: { value: null, matchMode: FilterMatchMode.EQUALS },
     };
 };
@@ -351,12 +338,7 @@ const initFilters1 = () => {
 const clearFilter1 = () => {
     initFilters1();
 };
-const expandAll = () => {
-    expandedRows.value = products.value.filter((p) => p.id);
-};
-const collapseAll = () => {
-    expandedRows.value = null;
-};
+
 const formatCurrency = (value) => {
     return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 };

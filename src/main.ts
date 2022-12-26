@@ -47,6 +47,7 @@ import Divider from 'primevue/divider';
 import Dock from 'primevue/dock';
 import Dropdown from 'primevue/dropdown';
 import DynamicDialog from 'primevue/dynamicdialog';
+import {FilterMatchMode,FilterOperator} from 'primevue/api';
 import Fieldset from 'primevue/fieldset';
 import FileUpload from 'primevue/fileupload';
 import Galleria from 'primevue/galleria';
@@ -249,3 +250,5 @@ app.component('ToggleButton', ToggleButton);
 // app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
 // app.component('VirtualScroller', VirtualScroller);
+app.component('FilterMatchMode', FilterMatchMode);
+app.component('FilterOperator', FilterOperator)
