@@ -104,7 +104,7 @@ const isOutsideClicked = (event) => {
   <div class="layout-topbar">
     <router-link to="/" class="layout-topbar-logo">
       <img :src="logoUrl" alt="logo" />
-      <span>TRAINEE MANAGEMENT</span>
+      <span>BOOKING MANAGEMENT</span>
     </router-link>
 
     <button

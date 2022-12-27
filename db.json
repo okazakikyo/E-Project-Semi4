@@ -28,16 +28,16 @@
       "usename": "jonhtt",
       "role": "user",
       "staff_id": {
-          "id": 1000,
-          "name": "John",
-          "email": "Johncc@mail.com",
-          "phone": "01234567891",
-          "birthday": "1991-05-19",
-          "address": "abc 580",
-          "image": "",
-          "bank_id": "",
-          "createAt": "2022-12-19",
-          "isDelete": 0
+        "id": 1000,
+        "name": "John",
+        "email": "Johncc@mail.com",
+        "phone": "01234567891",
+        "birthday": "1991-05-19",
+        "address": "abc 580",
+        "image": "",
+        "bank_id": "",
+        "createAt": "2022-12-19",
+        "isDelete": 0
       },
       "createAt": "2022-12-16",
       "isDelete": 0
@@ -49,16 +49,16 @@
       "usename": "jamesbutt",
       "role": "hr",
       "staff_id": {
-          "id": 1000,
-          "name": "James Butt",
-          "email": "Jamesbutt@mail.com",
-          "phone": "01234567891",
-          "birthday": "1991-03-16",
-          "address": "abc 580",
-          "image": "",
-          "bank_id": "",
-          "createAt": "2022-12-16",
-          "isDelete": 0
+        "id": 1000,
+        "name": "James Butt",
+        "email": "Jamesbutt@mail.com",
+        "phone": "01234567891",
+        "birthday": "1991-03-16",
+        "address": "abc 580",
+        "image": "",
+        "bank_id": "",
+        "createAt": "2022-12-16",
+        "isDelete": 0
       },
       "createAt": "2022-12-16",
       "isDelete": 0
@@ -243,12 +243,12 @@
       "id": 1005
     },
     {
-      "name": "test",
+      "name": "room 114",
       "capacity": "77",
       "description": "qwdwq",
       "createdAt": "2022-12-22T17:00:00.000Z",
       "end_date": "2023-01-06T17:00:00.000Z",
-      "image": "Screen Shot 2022-12-23 at 10.53.15.png",
+      "image": "DSC_3503.jpg",
       "active": 1,
       "id": 1008
     },
@@ -258,7 +258,7 @@
       "description": "qwd",
       "createdAt": "2022-11-30T17:00:00.000Z",
       "end_date": "2022-12-30T17:00:00.000Z",
-      "image": "Screen Shot 2022-12-23 at 10.52.32.png",
+      "image": "Conference-Room-Guide_Meeting-Room--768x420.jpg",
       "active": 1,
       "id": 1009
     },
@@ -268,7 +268,7 @@
       "description": "dqwwq",
       "createdAt": "2022-12-02T17:00:00.000Z",
       "end_date": "2022-12-30T17:00:00.000Z",
-      "image": "Screen Shot 2022-12-23 at 10.33.55.png",
+      "image": "360_F_219592708_11FDfZsfOq6VLcGL0dWBrBDhKSYnI1YA.jpg",
       "active": 1,
       "id": 1010
     },
@@ -287,6 +287,7 @@
       "description": "wqd",
       "createdAt": "2022-12-22T17:00:00.000Z",
       "end_date": "2022-12-30T17:00:00.000Z",
+      "image": "phong-hop-cho-thue-trangia-building-01(1).png",
       "active": 1,
       "id": 1012
     },
@@ -295,6 +296,7 @@
       "capacity": "2",
       "description": "qwd",
       "end_date": "2022-12-30T17:00:00.000Z",
+      "image": "Peerspace-hotel-meeting-room-1-1024x682.jpeg",
       "active": 1,
       "id": 1013
     },
@@ -397,17 +399,10 @@
       "image": "national-training-room.jpg",
       "orders": [
         {
-          "id": 1000,
-          "name": "James Butt",
+          "id": 1001,
+          "username": "Edam",
           "start_date": "2022-12-05",
           "end_date": "2022-12-08",
-          "status": 1
-        },
-        {
-          "id": 1003,
-          "name": "Adam",
-          "start_date": "2022-12-09",
-          "end_date": "2022-12-16",
           "status": 1
         }
       ],
@@ -442,6 +437,93 @@
       "isDelete": 0,
       "lastmodifiedat": "",
       "lastmodifiedby": ""
+    },
+    {
+      "title": "Room 105",
+      "host": "Edam",
+      "description": "some description abc",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "room_id": 1002,
+      "image": "national-training-room.jpg",
+      "orders": [
+        {
+          "id": 1001,
+          "username": "Edam",
+          "start_date": "2022-12-05",
+          "end_date": "2022-12-08",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "onlineLink": "",
+      "createAt": "2022-11-30",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": "",
+      "id": 1004
+    },
+    {
+      "title": "Room 107",
+      "description": "training room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "20201008-199WaterSt-2_v1-scaled.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27T10:07:27.244Z",
+          "end_date": "2022-12-27T17:00:00.000Z",
+          "slots": "6"
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1005
+    },
+    {
+      "title": "Room 107",
+      "description": "training room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "20201008-199WaterSt-2_v1-scaled.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27",
+          "end_date": "2022-12-29",
+          "slots": "6",
+          "id": 1001,
+          "status": "John"
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1006
+    },
+    {
+      "title": "Room 107",
+      "description": "training room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "20201008-199WaterSt-2_v1-scaled.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-28",
+          "end_date": "2022-12-29",
+          "slots": "5",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1007
     }
   ]
 }

@@ -2,7 +2,8 @@ import { defineRule, configure } from "vee-validate";
 import {
     required,
     confirmed,
-    email
+    email,
+    min,
 } from "@vee-validate/rules";
 import { default as en } from "@/vee-validate/en.json";
 import { localize, setLocale } from "@vee-validate/i18n";
@@ -10,6 +11,7 @@ import { localize, setLocale } from "@vee-validate/i18n";
 defineRule("confirmed", confirmed);
 defineRule("required", required);
 defineRule("email", email);
+defineRule("min", min);
 
 configure({
     generateMessage: localize({

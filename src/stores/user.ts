@@ -153,5 +153,15 @@ export const useUserStore = defineStore({
           
         }
       },
+      async bookRoom(room: any) {
+        try {
+          const res = await api.post<GenericResponse>(
+            'booking-list',
+            room
+          )
+        } catch (error) {
+          console.log(error)
+        }
+      }
     },
 })
