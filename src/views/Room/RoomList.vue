@@ -142,9 +142,9 @@ const updateRoom = async (id, data) => {
     <!-- Edit modal -->
   <Dialog header="Header" v-model:visible="displayModal" :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
     :style="{ width: '50vw' }" :modal="true">
-      {{ roomData }}
-      <div class="m-0">
-        <InputText v-model="roomData.name"></InputText>
+      <div class="row m-0">
+        <label class="col">Name</label>
+        <InputText class="col" v-model="roomData.name"></InputText>
       </div>
     <template #footer>
       <Button label="No" icon="pi pi-times" @click="displayModal = false" class="p-button-text" />

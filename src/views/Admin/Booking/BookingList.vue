@@ -11,7 +11,7 @@
             </div>
           </template>
           <Column :expander="true" headerStyle="width: 3rem" />
-          <Column field="title" header="Name" :sortable="true">
+          <Column :field="name" header="Name" :sortable="true">
             <template #body="slotProps">
               {{ slotProps.data.title }}
             </template>
@@ -94,66 +94,61 @@
       </div>
     </div>
 
-    <div class="col-12">
+    <!-- <div class="col-12">
       <div class="card">
         <h5>Booking List</h5>
-        <DataTable :value="bookingList" v-model:expandedRows="expandedRows" dataKey="id" responsiveLayout="scroll">
-          <template #header>
-            <div>
-              <Button icon="pi pi-plus" label="Expand All" @click="expandAll" class="mr-2 mb-2" />
-              <Button icon="pi pi-minus" label="Collapse All" @click="collapseAll" class="mb-2" />
-            </div>
-          </template>
-          <Column :expander="true" headerStyle="width: 3rem" />
-          <Column :field="nameRoom" header="Name" :sortable="true">
-            <template #body="nameRoom">
-              {{ nameRoom.data.title }}
+        <DataTable :value="nameRoom" v-model:expandedRows="expandedRows" dataKey="id" responsiveLayout="scroll">
+          <Column :expander="true" headerStyle="width: 3rem"/>
+          <Column header="Name" :sortable="true">
+            <template #body="name">
+              {{ name.index }}
             </template>
           </Column>
           <Column header="Image">
             <template #body="slotProps">
               <img :src="
-                contextPath + 'demo/images/room/' + slotProps.data.image
-              " :alt="slotProps.data.image" class="shadow-2" width="100" />
+                contextPath + 'demo/images/room/' + slotProps.data[0].image
+              " :alt="slotProps.data[0].name" class="shadow-2" width="100" />
             </template>
           </Column>
           <Column field="host" header="Host" :sortable="true">
             <template #body="slotProps">
-              {{ slotProps.data.host }}
+              {{ slotProps.data[0].host }}
             </template>
           </Column>
           <Column field="description" header="Description" :sortable="true">
             <template #body="slotProps">
-              {{ slotProps.data.description }}
+              {{ slotProps.data[0].description }}
             </template>
           </Column>
           <Column field="start_time" header="Start date" :sortable="true">
             <template #body="slotProps">
-              {{ (slotProps.data.start_time) }}
+              {{ (slotProps.data[0].start_time) }}
             </template>
           </Column>
           <Column field="end_time" header="End date" :sortable="true">
             <template #body="slotProps">
-              {{ (slotProps.data.end_time) }}
+              {{ (slotProps.data[0].end_time) }}
             </template>
           </Column>
           <Column field="status" header="Status" :sortable="true">
             <template #body="slotProps">
               <span :class="
                 'product-badge status-' +
-                (slotProps.data.status
+                (slotProps.data[0].status
                   ? 'instock'
                   : 'outofstock')
-              ">{{ slotProps.data.status ? 'Available' : 'Full' }}</span>
+              ">{{ slotProps.data[0].status ? 'Available' : 'Full' }}</span>
             </template>
           </Column>
           <template #expansion="slotProps">
             <div class="p-3">
-              <h5>Orders for {{ slotProps.data.name }}</h5>
-              <DataTable :value="slotProps.data.orders" responsiveLayout="scroll">
-                <Column field="name" header="Name" :sortable="true">
-                  <template #body="slotProps">
-                    {{ slotProps.data.name }}
+              {{ slotProps }}
+              <h5>Orders for</h5>
+              <DataTable :value="groupName(slotProps.data)" responsiveLayout="scroll">
+                <Column header="Name" :sortable="true">
+                  <template #body="props">
+                    {{ props.data }}
                   </template>
                 </Column>
                 <Column field="start_date" header="Start Date" :sortable="true">
@@ -186,7 +181,7 @@
           </template>
         </DataTable>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <!-- Edit modal -->
@@ -210,6 +205,7 @@ import { useLayout } from "@/layout/composables/layout";
 import { useUserStore } from "@/stores/user";
 import { mapActions } from "pinia";
 import _ from 'lodash';
+import Column from "primevue/column";
 
 const { contextPath } = useLayout();
 
@@ -233,8 +229,11 @@ onBeforeMount(async () => {
   try {
     bookingList.value = await listBooking.getBookingList()
     const groupRoom = _.groupBy(bookingList.value, 'title')
-    nameRoom.value = groupRoom
+    // nameRoom.value = groupRoom
     console.log(bookingList.value)
+    const lengthObj = Object.keys(groupRoom)
+    console.log(lengthObj)
+    nameRoom.value = lengthObj
     console.log(nameRoom.value)
   } catch (error) {
     console.log(error)

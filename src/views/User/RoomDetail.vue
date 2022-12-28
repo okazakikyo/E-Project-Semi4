@@ -92,7 +92,7 @@ export default defineComponent({
         ...mapState(useErrorStore, ['errors'])
     },
     methods: {
-        ...mapActions(useUserStore, ['getRoomById','bookRoom']),
+        ...mapActions(useUserStore, ['getRoomById','bookRoom', 'updateRoom']),
         async getRoomDetails() {
             const { contextPath } = useLayout();
             this.contextPath = contextPath;
@@ -129,7 +129,30 @@ export default defineComponent({
                     isDelete: this.roomDetails.isDelete,
                     onlineLink: ''
                 }
-                await this.bookRoom(submitData);
+                try {
+                    await this.bookRoom(submitData);
+                    const id = this.$route.params["id"] ? this.$route.params["id"] : null
+                    const calSlots = this.roomDetails.capacity - parseInt(this.bookingRoom.slots)
+                    const updateData = {
+                        id: id,
+                        name: this.roomDetails.name,
+                        capacity: calSlots.toString(),
+                        description: this.roomDetails.description,
+                        image: this.roomDetails.image,
+                        active: this.roomDetails.active,
+                        createdAt: this.roomDetails.createAt,
+                        end_date: this.roomDetails.end_date,
+                        isDelete: this.roomDetails.isDelete,
+                        lastmodifiedat: "",
+                        lastmodifiedby: ""
+                    }
+                    await this.updateRoom(id, updateData)
+                    if(!this.errors) {
+                        this.$router.push({ name: 'UserHome' })
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
             }
         }
     },

@@ -211,9 +211,9 @@
                         <template #body="{ data }">
                             <i class="pi" :class="{ 'text-green-500 pi-check-circle': !data.isDelete, 'text-pink-500 pi-times-circle': data.isDelete }"></i>
                         </template>
-                        <template #filter="{ filterModel }">
+                        <!-- <template #filter="{ filterModel }">
                         <TriStateCheckbox v-model="filterModel.value" />
-                        </template>
+                        </template> -->
                     </Column>
 
                     <Column field="Edit" header="Edit" :rowEditor="true" style="width:10%; min-width:8rem" bodyClass="text-center">
@@ -228,7 +228,6 @@
         <!-- Edit modal -->
   <Dialog header="Header" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '50vw'}" :modal="true">
             <p class="m-0">
-              {{ userDetails }}
             </p>
             <div class="card p-fluid">
                 <label>Name</label>

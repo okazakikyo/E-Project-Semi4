@@ -6,6 +6,7 @@ import { useUserStore } from '@/stores/user';
 import { mapActions, mapState } from 'pinia';
 import { useLoading } from "vue-loading-overlay";
 import { useToast } from "primevue/usetoast";
+import router from '@/router';
 
 const { contextPath } = useLayout();
 
