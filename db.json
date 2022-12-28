@@ -1,0 +1,705 @@
+{
+  "users": [
+    {
+      "username": "test",
+      "email": "test@gmail.com",
+      "password": "$2a$10$/1kCHU8Yl08SeRnLzfZZwetonr8mLuk31uFbXS2GXCDXluvepnx7q",
+      "isDelete": 0,
+      "id": 1002,
+      "staff_id": {
+        "id": 1002,
+        "name": "Admin",
+        "email": "admin@gmail.com",
+        "phone": "01234567891",
+        "birthday": "1995-05-25",
+        "address": "cmt 580",
+        "image": "",
+        "bank_id": "",
+        "createAt": "2022-12-26",
+        "isDelete": 0
+      },
+      "createAt": "2022-12-26",
+      "role": "admin"
+    },
+    {
+      "email": "Johncc@mail.com",
+      "password": "$2a$10$ZreppnU6WDHGcz5hIjXS0uE0RsreAp8C49HW0CgsfnPsf.W0Y5Rlu",
+      "id": 1001,
+      "usename": "jonhtt",
+      "role": "user",
+      "staff_id": {
+        "id": 1000,
+        "name": "John",
+        "email": "Johncc@mail.com",
+        "phone": "01234567891",
+        "birthday": "1991-05-19",
+        "address": "abc 580",
+        "image": "",
+        "bank_id": "",
+        "createAt": "2022-12-19",
+        "isDelete": 0
+      },
+      "createAt": "2022-12-16",
+      "isDelete": 0
+    },
+    {
+      "email": "Jamesbutt@mail.com",
+      "password": "$2a$10$WTRNNP3zPo75fpymSIfYv.4ezkQGeT7W7dCvc1ppb1XgyRWoQEf6C",
+      "id": 1000,
+      "usename": "jamesbutt",
+      "role": "hr",
+      "staff_id": {
+        "id": 1000,
+        "name": "James Butt",
+        "email": "Jamesbutt@mail.com",
+        "phone": "01234567891",
+        "birthday": "1991-03-16",
+        "address": "abc 580",
+        "image": "",
+        "bank_id": "",
+        "createAt": "2022-12-16",
+        "isDelete": 0
+      },
+      "createAt": "2022-12-16",
+      "isDelete": 0
+    }
+  ],
+  "staff": [
+    {
+      "id": 1000,
+      "name": "James Butt",
+      "email": "Jamesbutt@mail.com",
+      "phone": "01234567891",
+      "birthday": "1991-03-16",
+      "address": "abc 580",
+      "image": "",
+      "bank_id": "",
+      "createAt": "2022-12-16",
+      "isDelete": 0
+    },
+    {
+      "id": 1001,
+      "name": "John",
+      "email": "Johncc@mail.com",
+      "phone": "01234567891",
+      "birthday": "1991-05-19",
+      "address": "abc 580",
+      "image": "",
+      "bank_id": "",
+      "createAt": "2022-12-19",
+      "isDelete": 0
+    },
+    {
+      "id": 1002,
+      "name": "Admin",
+      "email": "admin@gmail.com",
+      "phone": "01234567891",
+      "birthday": "1995-05-25",
+      "address": "cmt 580",
+      "image": "",
+      "bank_id": "",
+      "createAt": "2022-12-26",
+      "isDelete": 0
+    }
+  ],
+  "department": [
+    {
+      "id": 1000,
+      "department": "Admin",
+      "position": "admin",
+      "active": 1,
+      "createAt": "2022-12-19",
+      "isDelete": 0
+    },
+    {
+      "id": 1001,
+      "department": "User",
+      "position": "user",
+      "active": 1,
+      "createAt": "2022-12-20",
+      "isDelete": 0
+    }
+  ],
+  "staff_department": [
+    {
+      "id": 1000,
+      "staff_id": [
+        {
+          "id": 1000,
+          "name": "James Butt",
+          "email": "Jamesbutt@mail.com",
+          "phone": "01234567891",
+          "birthday": "1991-03-16",
+          "address": "abc 580",
+          "image": "",
+          "bank_id": "",
+          "createAt": "2022-12-16",
+          "isDelete": 0
+        }
+      ],
+      "department_id": [
+        {
+          "id": 1000,
+          "department": "Admin",
+          "position": "admin",
+          "active": 1,
+          "createAt": "2022-12-19",
+          "isDelete": 0
+        }
+      ],
+      "active": 1,
+      "createAt": "2022-12-10",
+      "isDelete": 0
+    },
+    {
+      "id": 1001,
+      "staff_id": [
+        {
+          "id": 1001,
+          "name": "John",
+          "email": "Johncc@mail.com",
+          "phone": "01234567891",
+          "birthday": "1991-05-19",
+          "address": "abc 580",
+          "image": "",
+          "bank_id": "",
+          "createAt": "2022-12-19",
+          "isDelete": 0
+        }
+      ],
+      "department_id": [
+        {
+          "id": 1001,
+          "department": "User",
+          "position": "user",
+          "active": 1,
+          "createAt": "2022-12-20",
+          "isDelete": 0
+        }
+      ],
+      "active": 1,
+      "createAt": "2022-12-15",
+      "isDelete": 0
+    }
+  ],
+  "room-list": [
+    {
+      "id": 1000,
+      "name": "Room 104",
+      "capacity": "37",
+      "description": "meeting room",
+      "image": "meeting-rooms.jpg",
+      "active": 1,
+      "createdAt": "2022-12-01",
+      "end_date": "2022-12-30",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "id": 1001,
+      "name": "Room 107",
+      "capacity": 60,
+      "description": "training room",
+      "image": "20201008-199WaterSt-2_v1-scaled.jpg",
+      "active": 1,
+      "createdAt": "2022-12-01",
+      "end_date": "2022-12-30",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "id": 1003,
+      "name": "Room 666",
+      "capacity": 0,
+      "description": "training room",
+      "image": "national-training-room.jpg",
+      "active": 0,
+      "createdAt": "2022-05-12",
+      "end_date": "2022-06-30",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "id": 1004,
+      "name": "qwd",
+      "capacity": "118",
+      "description": "qwd",
+      "image": "national-training-room.jpg",
+      "active": 1,
+      "end_date": "2022-12-30",
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "name": "test",
+      "capacity": 11,
+      "description": "wqdq",
+      "createdAt": "2022-11-30",
+      "end_date": "2022-12-30",
+      "image": "national-training-room.jpg",
+      "active": 1,
+      "id": 1005
+    },
+    {
+      "name": "room 114",
+      "capacity": "77",
+      "description": "qwdwq",
+      "createdAt": "2022-12-22",
+      "end_date": "2023-01-06",
+      "image": "DSC_3503.jpg",
+      "active": 1,
+      "id": 1008
+    },
+    {
+      "name": "test1111",
+      "capacity": "123",
+      "description": "qwd",
+      "createdAt": "2022-11-30",
+      "end_date": "2022-12-30",
+      "image": "Conference-Room-Guide_Meeting-Room--768x420.jpg",
+      "active": 1,
+      "id": 1009
+    },
+    {
+      "id": 1010,
+      "name": "test455",
+      "capacity": "9",
+      "description": "dqwwq",
+      "image": "360_F_219592708_11FDfZsfOq6VLcGL0dWBrBDhKSYnI1YA.jpg",
+      "active": 1,
+      "end_date": "2022-12-30",
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "name": "gg",
+      "capacity": "232",
+      "description": "wqd",
+      "createdAt": "2022-12-22",
+      "end_date": "2022-12-30",
+      "image": "phong-hop-cho-thue-trangia-building-01(1).png",
+      "active": 1,
+      "id": 1012
+    },
+    {
+      "name": "ggh",
+      "capacity": "2",
+      "description": "qwd",
+      "end_date": "2022-12-30",
+      "image": "Peerspace-hotel-meeting-room-1-1024x682.jpeg",
+      "active": 1,
+      "id": 1013
+    },
+    {
+      "image": "phong-hop-cho-thue-trangia-building-01(1).png",
+      "name": "Room 99",
+      "capacity": "8",
+      "description": "test",
+      "createdAt": "2022-12-20",
+      "end_date": "2022-12-30",
+      "active": 1,
+      "id": 1020
+    },
+    {
+      "name": "Room test 11",
+      "capacity": "12",
+      "description": "aasda",
+      "createdAt": "2022-12-27",
+      "end_date": "2022-12-27",
+      "image": "360_F_219592708_11FDfZsfOq6VLcGL0dWBrBDhKSYnI1YA.jpg",
+      "active": 1,
+      "id": 1021
+    }
+  ],
+  "booking-list": [
+    {
+      "id": 1003,
+      "title": "Room 666",
+      "host": "Edam",
+      "description": "abc xyxx",
+      "start_time": "2022-05-12",
+      "end_time": "2022-06-30",
+      "room_id": 1001,
+      "image": "20201008-199WaterSt-2_v1-scaled.jpg",
+      "orders": [
+        {
+          "id": 1001,
+          "name": "John",
+          "start_date": "2022-06-01",
+          "end_date": "2022-06-05",
+          "status": 0
+        },
+        {
+          "id": 1002,
+          "name": "Eve",
+          "start_date": "2022-05-25",
+          "end_date": "2022-06-02",
+          "status": 0
+        }
+      ],
+      "status": 0,
+      "onlineLink": "",
+      "createAt": "2022-05-10",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "id": 1001,
+      "title": "Room 105",
+      "host": "Edam",
+      "description": "some description abc",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "room_id": 1002,
+      "image": "national-training-room.jpg",
+      "orders": [
+        {
+          "id": 1001,
+          "name": "Edam",
+          "start_date": "2022-12-05",
+          "end_date": "2022-12-08",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "onlineLink": "",
+      "createAt": "2022-11-30",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "id": 1000,
+      "title": "Room 101",
+      "host": "Ioni BB",
+      "description": "meeting room abc",
+      "start_time": "2022-11-30",
+      "end_time": "2022-12-15",
+      "room_id": 1002,
+      "image": "meeting-rooms.jpg",
+      "orders": [
+        {
+          "id": 1003,
+          "name": "Adam",
+          "start_date": "2022-12-01",
+          "end_date": "2022-12-02",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "onlineLink": "",
+      "createAt": "2022-11-30",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "title": "Room 105",
+      "host": "Edam",
+      "description": "some description abc",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "room_id": 1002,
+      "image": "national-training-room.jpg",
+      "orders": [
+        {
+          "id": 1001,
+          "name`": "Edam",
+          "start_date": "2022-12-05",
+          "end_date": "2022-12-08",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "onlineLink": "",
+      "createAt": "2022-11-30",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": "",
+      "id": 1004
+    },
+    {
+      "title": "Room 107",
+      "description": "training room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "20201008-199WaterSt-2_v1-scaled.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27",
+          "end_date": "2022-12-29",
+          "slots": "6",
+          "id": 1001,
+          "status": "John"
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1006
+    },
+    {
+      "title": "Room 107",
+      "description": "training room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "20201008-199WaterSt-2_v1-scaled.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-28",
+          "end_date": "2022-12-29",
+          "slots": "5",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1007
+    },
+    {
+      "title": "Room 104",
+      "description": "meeting room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "meeting-rooms.jpg",
+      "orders": [
+        {
+          "end_date": "2022-12-27",
+          "start_date": "2022-12-27",
+          "slots": "6",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1008
+    },
+    {
+      "title": "Room 104",
+      "description": "meeting room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "meeting-rooms.jpg",
+      "orders": [
+        {
+          "end_date": "2022-12-27",
+          "start_date": "2022-12-27",
+          "slots": "9",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1009
+    },
+    {
+      "title": "Room 104",
+      "description": "meeting room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "meeting-rooms.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27",
+          "end_date": "2022-12-28",
+          "slots": "6",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1010
+    },
+    {
+      "title": "Room 104",
+      "description": "meeting room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "meeting-rooms.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27",
+          "end_date": "2022-12-28",
+          "slots": "1",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1011
+    },
+    {
+      "title": "Room 104",
+      "description": "meeting room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "meeting-rooms.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27",
+          "end_date": "2022-12-30",
+          "slots": "15",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1012
+    },
+    {
+      "title": "Room 104",
+      "description": "meeting room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "meeting-rooms.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27",
+          "end_date": "2022-12-30",
+          "slots": "15",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1013
+    },
+    {
+      "title": "Room 104",
+      "description": "meeting room",
+      "start_time": "2022-12-01",
+      "end_time": "2022-12-30",
+      "image": "meeting-rooms.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-28",
+          "end_date": "2022-12-29",
+          "slots": "6",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-01",
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1014
+    },
+    {
+      "title": "Room 104",
+      "description": "meeting room",
+      "end_time": "2022-12-30",
+      "image": "meeting-rooms.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27",
+          "end_date": "2022-12-29",
+          "slots": "5",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1015
+    },
+    {
+      "title": "Room 104",
+      "description": "meeting room",
+      "end_time": "2022-12-30",
+      "image": "meeting-rooms.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27",
+          "end_date": "2022-12-28",
+          "slots": "2",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "isDelete": 0,
+      "onlineLink": "",
+      "id": 1016
+    },
+    {
+      "title": "test455",
+      "description": "dqwwq",
+      "start_time": "2022-12-02",
+      "end_time": "2022-12-30",
+      "image": "360_F_219592708_11FDfZsfOq6VLcGL0dWBrBDhKSYnI1YA.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27",
+          "end_date": "2022-12-28",
+          "slots": "2",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-12-02",
+      "onlineLink": "",
+      "id": 1017
+    },
+    {
+      "title": "qwd",
+      "description": "qwd",
+      "start_time": "2022-11-30",
+      "end_time": "2022-12-30",
+      "image": "national-training-room.jpg",
+      "orders": [
+        {
+          "start_date": "2022-12-27",
+          "end_date": "2022-12-29",
+          "slots": "5",
+          "id": 1001,
+          "name": "John",
+          "status": 1
+        }
+      ],
+      "status": 1,
+      "createAt": "2022-11-30",
+      "onlineLink": "",
+      "id": 1018
+    }
+  ]
+}
