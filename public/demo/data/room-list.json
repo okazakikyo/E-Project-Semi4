@@ -1,0 +1,54 @@
+{
+  "code": "roomlist",
+  "data": [
+    {
+      "id": 1000,
+      "name": "Room 101",
+      "capacity": 50,
+      "description": "meeting room",
+      "image": "meeting-rooms.jpg",
+      "active": 1,
+      "createdAt": "2022-11-30",
+      "end_date": "2022-12-15",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "id": 1001,
+      "name": "Room 105",
+      "capacity": 60,
+      "description": "training room",
+      "image": "20201008-199WaterSt-2_v1-scaled.jpg",
+      "active": 1,
+      "createdAt": "2022-12-01",
+      "end_date": "2022-12-30",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "id": 1003,
+      "name": "Room 666",
+      "capacity": 0,
+      "description": "training room",
+      "image": "national-training-room.jpg",
+      "active": 0,
+      "createdAt": "2022-05-12",
+      "end_date": "2022-06-30",
+      "isDelete": 0,
+      "lastmodifiedat": "",
+      "lastmodifiedby": ""
+    },
+    {
+      "name": "qwd",
+      "capacity": 123,
+      "description": "qwd",
+      "createdAt": "2022-11-30T17:00:00.000Z",
+      "end_date": "2022-12-30T17:00:00.000Z",
+      "image": "national-training-room.jpg",
+      "id": 1004,
+      "active": 1
+    }
+  ]
+}
