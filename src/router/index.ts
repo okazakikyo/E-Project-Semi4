@@ -7,6 +7,8 @@ import Error from '@/views/Error.vue';
 import Home from '@/views/User/Home.vue';
 import RoomDetail from '@/views/User/RoomDetail.vue';
 const Login = () => import("@/views/Login.vue");
+import UserLogin from '@/views/User/UserLogin.vue';
+import UserRegistration from '@/views/User/UserRegistration.vue';
 // import { getAuth, onAuthStateChanged, UserCredential } from 'firebase/auth';
 
 // const getCurrentUser = () => {
@@ -24,10 +26,10 @@ const Login = () => import("@/views/Login.vue");
 const ifNotAuthenticated = async (to: any, from: any, next: any) => {
   const userInfo: any = JSON.parse(localStorage.getItem("user"));
      if(userInfo) {
-        next("/")
+        next("/user/home")
      } else{
-        if (to.path === "/") {
-          next("/");
+        if (to.path === "/user/home") {
+          next("/user/home");
         }
         next()
      }
@@ -38,15 +40,28 @@ const ifAuthenticated = (async (to: any, from: any, next: any) => {
     if(userInfo) {
       next()
     } else{
-      next('/login')
+      next('/user/login')
     }
 });
 
 const routes = [
   {
-    path: '/user',
+    path: '/user/login',
+    name: 'UserLogin',
+    component: UserLogin,
+    beforeEnter: ifNotAuthenticated,
+  },
+  {
+    path: '/user/register',
+    name: 'UserRegistration',
+    component: UserRegistration,
+    beforeEnter: ifNotAuthenticated,
+  },
+  {
+    path: '/user/home',
     name: 'HomeUser',
     component: HomeLayout,
+    beforeEnter: ifAuthenticated,
     children: [
       {
         path: '/user/home',
@@ -60,71 +75,71 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login,
-    beforeEnter: ifNotAuthenticated,
-  },
-  {
-    path: '/register',
-    name: 'Registration',
-    component: () => import('@/views/Registration.vue'),
-    beforeEnter: ifNotAuthenticated,
-  },
-  {
-    path: '/',
-    name: 'Home',
-    component: AppLayout,
-    beforeEnter: ifAuthenticated,
-    children: [
-      {
-        path: '/',
-        name: 'Dashboard',
-        component: () => import('@/views/Dashboard.vue')
-      },
-      {
-        path: '/calendar',
-        name: 'Calendar',
-        component: () => import('@/components/CalendarTest.vue')
-      },
-      {
-        path: '/calendar-demo',
-        name: 'CalendarDemo',
-        component: () => import('@/components/CalendarDemo.vue')
-      },
-      {
-        path: '/hr/user-list',
-        name: 'UserList',
-        component: () => import('@/views/HR/User/UserList.vue')
-      },
-      {
-        path: '/admin/booking-list',
-        name: 'BookingList',
-        component: () => import('@/views/Admin/Booking/BookingList.vue')
-      },
-      {
-        path: '/admin/create-room',
-        name: 'CreateRoom',
-        component: () => import('@/views/Admin/Booking/CreateRoom.vue')
-      },
-      {
-        path: '/room-list',
-        name: 'RoomList',
-        component: () => import('@/views/Room/RoomList.vue')
-      },
-      {
-        path: '/trainee-list',
-        name: 'TraineeList',
-        component: () => import('@/views/Trainee/TraineeList.vue')
-      },
-      {
-        path: '/hr/staff',
-        name: 'StaffManage',
-        component: () => import('@/views/HR/StaffManage.vue')
-      },
-    ],
-  },
+  // {
+  //   path: '/login',
+  //   name: 'Login',
+  //   component: Login,
+  //   beforeEnter: ifNotAuthenticated,
+  // },
+  // {
+  //   path: '/register',
+  //   name: 'Registration',
+  //   component: () => import('@/views/Registration.vue'),
+  //   beforeEnter: ifNotAuthenticated,
+  // },
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: AppLayout,
+  //   beforeEnter: ifAuthenticated,
+  //   children: [
+  //     {
+  //       path: '/',
+  //       name: 'Dashboard',
+  //       component: () => import('@/views/Dashboard.vue')
+  //     },
+  //     {
+  //       path: '/calendar',
+  //       name: 'Calendar',
+  //       component: () => import('@/components/CalendarTest.vue')
+  //     },
+  //     {
+  //       path: '/calendar-demo',
+  //       name: 'CalendarDemo',
+  //       component: () => import('@/components/CalendarDemo.vue')
+  //     },
+  //     {
+  //       path: '/hr/user-list',
+  //       name: 'UserList',
+  //       component: () => import('@/views/HR/User/UserList.vue')
+  //     },
+  //     {
+  //       path: '/admin/booking-list',
+  //       name: 'BookingList',
+  //       component: () => import('@/views/Admin/Booking/BookingList.vue')
+  //     },
+  //     {
+  //       path: '/admin/create-room',
+  //       name: 'CreateRoom',
+  //       component: () => import('@/views/Admin/Booking/CreateRoom.vue')
+  //     },
+  //     {
+  //       path: '/room-list',
+  //       name: 'RoomList',
+  //       component: () => import('@/views/Room/RoomList.vue')
+  //     },
+  //     {
+  //       path: '/trainee-list',
+  //       name: 'TraineeList',
+  //       component: () => import('@/views/Trainee/TraineeList.vue')
+  //     },
+  //     {
+  //       path: '/hr/staff',
+  //       name: 'StaffManage',
+  //       component: () => import('@/views/HR/StaffManage.vue')
+  //     },
+  //   ],
+  // },
   { path: "/:pathMatch(.*)*", component: Error },
 ]
 
