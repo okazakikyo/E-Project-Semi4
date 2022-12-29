@@ -4,6 +4,7 @@ import {
     confirmed,
     email,
     min,
+    numeric,
 } from "@vee-validate/rules";
 import { default as en } from "@/vee-validate/en.json";
 import { localize, setLocale } from "@vee-validate/i18n";
@@ -12,6 +13,7 @@ defineRule("confirmed", confirmed);
 defineRule("required", required);
 defineRule("email", email);
 defineRule("min", min);
+defineRule("numeric", numeric);
 
 configure({
     generateMessage: localize({
@@ -26,6 +28,10 @@ configure({
                 start_date: "Start date",
                 end_date: "End date",
                 email: "Email",
+                name: "Name",
+                phone: "Phone number",
+                birthday: "Birthday",
+
             }
         }
     })

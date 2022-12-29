@@ -60,7 +60,7 @@
                   Login
                 </div>
               </div>
-              <div class="p-error" v-if="errMsg">{{ errMsg }}</div>
+              <div class="p-error" v-if="errors">{{ errors }}</div>
               <div>
                 <label
                   for="email1"

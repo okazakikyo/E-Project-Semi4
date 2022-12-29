@@ -7,39 +7,11 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AppBreadcrumb: typeof import('./src/components/AppBreadcrumb.vue')['default']
-    AppFooter: typeof import('./src/components/AppFooter.vue')['default']
-    AppHeader: typeof import('./src/components/AppHeader.vue')['default']
-    AppHeaderDropdownAccnt: typeof import('./src/components/AppHeaderDropdownAccnt.vue')['default']
     AppSidebar: typeof import('./src/components/AppSidebar.vue')['default']
-    BBadge: typeof import('bootstrap-vue-3')['BBadge']
-    BBreadcrumb: typeof import('bootstrap-vue-3')['BBreadcrumb']
-    BBtn: typeof import('bootstrap-vue-3')['BBtn']
-    BButton: typeof import('bootstrap-vue-3')['BButton']
-    BCard: typeof import('bootstrap-vue-3')['BCard']
-    BCardText: typeof import('bootstrap-vue-3')['BCardText']
-    BCarousel: typeof import('bootstrap-vue-3')['BCarousel']
-    BCarouselSlide: typeof import('bootstrap-vue-3')['BCarouselSlide']
-    BDatepicker: typeof import('bootstrap-vue-3')['BDatepicker']
-    BDropdownDivider: typeof import('bootstrap-vue-3')['BDropdownDivider']
-    BDropdownItem: typeof import('bootstrap-vue-3')['BDropdownItem']
-    BFormDatepicker: typeof import('bootstrap-vue-3')['BFormDatepicker']
-    BInputGroup: typeof import('bootstrap-vue-3')['BInputGroup']
-    BModal: typeof import('bootstrap-vue-3')['BModal']
-    BNav: typeof import('bootstrap-vue-3')['BNav']
-    BNavItem: typeof import('bootstrap-vue-3')['BNavItem']
-    BNavItemDropdown: typeof import('bootstrap-vue-3')['BNavItemDropdown']
-    Calendar: typeof import('./src/components/Calendar.vue')['default']
     CalendarDemo: typeof import('./src/components/CalendarDemo.vue')['default']
-    CalendarTest: typeof import('./src/components/CalendarTest.vue')['default']
-    DocsExample: typeof import('./src/components/DocsExample.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     InputComponent: typeof import('./src/components/InputComponent.vue')['default']
     Modal: typeof import('./src/components/Modal.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-  }
-  export interface ComponentCustomProperties {
-    vBModal: typeof import('bootstrap-vue-3')['VBModal']
   }
 }

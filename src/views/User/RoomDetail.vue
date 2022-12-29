@@ -126,6 +126,7 @@ export default defineComponent({
                 this.bookingRoom.end_date = moment(this.bookingRoom.end_date).format('YYYY-MM-DD')
                 const submitData = {
                     title: this.roomDetails.name,
+                    host: this.bookingRoom.name,
                     description: this.roomDetails.description,
                     start_time: this.roomDetails.createdAt,
                     end_time: this.roomDetails.end_date,

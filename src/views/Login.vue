@@ -1,5 +1,4 @@
 <template>
-  {{ errors }}
   <v-form @submit="onSubmit">
     <div
       class="
