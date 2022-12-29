@@ -1,5 +1,4 @@
 <template>
-  {{ errors }}
   <v-form @submit="onSubmit">
     <div
       class="
@@ -57,10 +56,10 @@
             </Dialog>
             <div class="text-center mb-5">
               <div class="text-900 text-3xl font-medium mb-3">
-                Login
+                Staff Login
               </div>
             </div>
-            <div class="p-error" v-if="errMsg">{{ errMsg }}</div>
+            <div class="p-error" v-if="errors">{{ errors }}</div>
             <div>
               <label
                 for="email1"
@@ -70,7 +69,7 @@
               <v-field
                 type="text"
                 rules="required|email"
-                name="userName"
+                name="email"
                 v-slot="{ field, meta }"
               >
                 <InputText
@@ -83,7 +82,7 @@
                 />
               </v-field>
               <div>
-                <error-message class="p-error" :name="'userName'"></error-message>
+                <error-message class="p-error" :name="'email'"></error-message>
               </div>
               <label
                 for="password1"
@@ -120,7 +119,7 @@
                   gap-5
                 "
               >
-                <div class="flex align-items-center">
+                <!-- <div class="flex align-items-center">
                     <RouterLink
                     :to="{ name: 'Registration' }"
                     class="
@@ -143,7 +142,7 @@
                   "
                   style="color: var(--primary-color)"
                   >Forgot password?</a
-                >
+                > -->
               </div>
               <Button
                 type="submit"
@@ -196,6 +195,7 @@ export default defineComponent({
     ...mapState(useErrorStore, ["errors"]),
   },
   methods: {
+    ...mapActions(useErrorStore, ['setEmptyError']),
     ...mapActions(useUserStore, ['login']),
     async onSubmit() {
       const $loading = useLoading();
@@ -231,6 +231,7 @@ export default defineComponent({
       loader.hide();
     },
     closeConfirmation() {
+      this.setEmptyError()
       this.displayConfirmation = false;
     },
   },

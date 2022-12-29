@@ -1,7 +1,7 @@
 <template>
 <div class="">
     <div class="card" v-if="user.length > 0">
-            <h5>Staff List</h5>
+            <h5>User List</h5>
             <DataTable :value="user" :paginator="true" class="p-datatable-customers" showGridlines :rows="10"
                 dataKey="id" v-model:filters="filters1" filterDisplay="menu" :loading="loading1" responsiveLayout="scroll"
                 :globalFilterFields="['staff_id.name','email','staff_id.phone','role','staff_id.birthday', 'staff_id.bank_id', 'isDelete']">
@@ -49,23 +49,10 @@
                     <template #body="{data}">
                         <span class="image-text">{{data.role}}</span>
                     </template>
-                    <template #filter="{filterModel}">
-                        <div class="mb-3 font-bold">Role Picker</div>
-                        <MultiSelect v-model="filterModel.value" :options="roles" optionLabel="name" placeholder="Any" class="p-column-filter">
-                            <template #option="slotProps">
-                                <div class="p-multiselect-representative-option">
-                                    <span class="image-text">{{slotProps.option.name}}</span>
-                                </div>
-                            </template>
-                        </MultiSelect>
-                    </template>
                 </Column>
                 <Column header="Date" filterField="date" dataType="date" style="min-width:10rem">
                     <template #body="{data}">
                         {{formatDate(data.staff_id.birthday, 'YYYY/MM/DD')}}
-                    </template>
-                    <template #filter="{filterModel}">
-                        <Calendar v-model="filterModel.value" dateFormat="yy/mm/dd/" placeholder="yyyy/mm/dd/" />
                     </template>
                 </Column>
                 <Column header="Phone Number" filterField="staff_id.phone" dataType="numeric" style="min-width:10rem">
@@ -88,12 +75,39 @@
                     <template #body="{data}">
                         <i class="pi" :class="{'text-green-500 pi-check-circle': !data.isDelete, 'text-pink-500 pi-times-circle': data.isDelete}"></i>
                     </template>
-                    <template #filter={filterModel}>
-                        <TriStateCheckbox v-model="filterModel.value" />
-                    </template>
+                </Column>
+                <Column headerStyle="width:4rem">
+                  <template #body="slotProps">
+                    <Button icon="pi pi-pencil" @click="editStaff(slotProps.data.id)" />
+                  </template>
                 </Column>
             </DataTable>
         </div>
+
+         <!-- Edit modal -->
+  <Dialog header="Header" v-model:visible="displayModal" :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
+    :style="{ width: '50vw' }" :modal="true">
+    <div class="row">
+        <label>Name</label>
+        <InputText type="text" v-model="userInfo.staff_id.name" :value="userInfo.staff_id.name"/>
+        <label>Email (read only)</label>
+        <InputText type="text" v-model="userInfo.email" :value="userInfo.email" readonly/>
+        <label>Address</label>
+        <InputText type="text" v-model="userInfo.staff_id.address" :value="userInfo.staff_id.address ? userInfo.staff_id.address : ''" />
+        <label>BirthDay (read only)</label>
+        <Calendar readonly inputId="calendar" :maxDate="new Date(userInfo.staff_id.birthday)" label="Adress" v-model="userInfo.staff_id.birthday" :value="formatDate(userInfo.staff_id.birthday, 'YYYY/MM/DD')" />
+        <label>Bank ID</label>
+        <InputText type="text" v-model="userInfo.staff_id.bank_id" :value="userInfo.staff_id.bank_id ? userInfo.staff_id.bank_id : ''" />
+        <label>Phone number</label>
+        <InputText type="number" v-model="userInfo.staff_id.phone" :value="userInfo.staff_id.phone ? userInfo.staff_id.phone : ''" />
+        <label>Active</label>
+        <Dropdown v-model="userInfo.isDelete" :options="active" optionLabel="name" optionValue="code" :value="userInfo.isDelete ? active[1].name : active[0].name" />
+    </div>
+    <template #footer>
+      <Button label="Close" icon="pi pi-times" @click="displayModal = false" class="p-button-text" />
+      <Button label="Save" icon="pi pi-check" @click="editUser(userInfo.id, userInfo)" autofocus />
+    </template>
+  </Dialog>
 </div>
 </template>
 
@@ -103,6 +117,7 @@ import { useUserStore } from "@/stores/user";
 import { useErrorStore } from "@/stores/errors";
 import { mapActions, mapState } from "pinia";
 import {FilterMatchMode,FilterOperator} from 'primevue/api';
+import { useLoading } from "vue-loading-overlay";
 import moment from "moment";
 
 export default defineComponent ({
@@ -121,17 +136,20 @@ export default defineComponent ({
             'isDelete': {value: null, matchMode: FilterMatchMode.EQUALS}
         },
         loading1: true,
-        roles: [
-            {name: 'admin'},
-            {name: 'user'},
-            {name: 'hr'}
+        userInfo: {
+            staff_id: {}
+        },
+        displayModal: false,
+        active: [
+            { name: 'Active', code: 0 },
+            { name: 'InActive', code: 1 }
         ]
     }),
     computed: {
         ...mapState(useUserStore, ['user'])
     },
     methods: {
-        ...mapActions(useUserStore, ['getListUser']),
+        ...mapActions(useUserStore, ['getListUser', 'getUser', 'updateUser']),
         async getListUserData() {
             await this.getListUser();
             console.log(this.user)
@@ -157,12 +175,36 @@ export default defineComponent ({
             }
             return null
         },
+        async editStaff(id: any) {
+            const $loading = useLoading();
+            const loader = $loading.show({});
+            this.displayModal = true
+            try {
+                this.userInfo = await this.getUser(id)
+            } catch (error) {
+                
+            }
+            loader.hide();
+        },
         clearFilter1() {
             this.initFilters1();
         },
+        async editUser(id: any,info: any ) {
+            const $loading = useLoading();
+            const loader = $loading.show({});
+            try {
+                await this.updateUser(id, info);
+            } catch (error) {}
+            await this.getListUser();
+            this.displayModal = false
+            loader.hide();
+        }
     },
     async created() {
+        const $loading = useLoading();
+        const loader = $loading.show({});
         await this.getListUserData();
+        loader.hide();
     }
 })
 

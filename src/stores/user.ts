@@ -43,9 +43,13 @@ export const useUserStore = defineStore({
             'login',
             user
           )
-          localStorage.setItem('user', JSON.stringify(response.data))
-          this.loginData = JSON.parse(localStorage.getItem('user'))
-          return this.loginData
+          this.loginData = response.data
+          if(this.loginData.user.role == "admin") {
+            localStorage.setItem('user', JSON.stringify(this.loginData))
+            return this.loginData
+          } else {
+            storeError.setError("Admin account only, please try again!")
+          }
         }catch(e) {
           if(e.response.status == 400) {
             storeError.setError("Invalid email or password!")
@@ -63,7 +67,11 @@ export const useUserStore = defineStore({
           )
           localStorage.setItem('user', JSON.stringify(response.data))
         }catch(e) {
-          storeError.setError(e.message)
+          if(e.response.status == 400) {
+            storeError.setError("Faield to create account, check your email again!")
+          } else {
+            storeError.setError(e.message)
+          }
         }
       },
       async getUser(userId: any) {
@@ -76,6 +84,17 @@ export const useUserStore = defineStore({
           return response.data
         } catch(e) {
           storeError.setError(e)
+        }
+      },
+      async updateUser(userId: any, user: any) {
+        try {
+          const res = await api.put<GenericResponse>(
+            `users/${userId}`,
+            user
+          )
+          return res.data
+        } catch (error) {
+          console.log(error)
         }
       },
       async getListUser() {

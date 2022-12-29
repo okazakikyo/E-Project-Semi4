@@ -20,40 +20,15 @@ const model = ref([
                 label: 'User', icon: 'pi pi-fw pi-user',
                 items: [
                     {
-                        label: 'User List',
-                        icon: 'pi pi-fw pi-list',
-                        to: '/hr/user-list'
-                    },
-                    {
-                        label: 'Error',
-                        icon: 'pi pi-fw pi-times-circle',
-                        to: '/auth/erorr'
-                    },
-                    {
-                        label: 'Access Denied',
-                        icon: 'pi pi-fw pi-lock',
-                        to: '/auth/access'
-                    }
-                ]
-            },
-            { 
-                label: 'Staff', icon: 'pi pi-fw pi-id-card',
-                items: [
-                    {
-                        label: 'Trainee List',
-                        icon: 'pi pi-fw pi-list',
-                        to: '/trainee-list'
-                    },
-                    {
-                        label: 'Staff Manage',
-                        icon: 'pi pi-fw pi-user',
+                        label: 'User Manage',
+                        icon: 'pi pi-fw pi-id-card',
                         to: '/hr/staff'
                     },
                     {
-                        label: 'Access Denied',
-                        icon: 'pi pi-fw pi-lock',
-                        to: '/auth/access'
-                    }
+                        label: 'Create account',
+                        icon: 'pi pi-user-plus',
+                        to: '/hr/user-account'
+                    },
                 ]
             },
             { 
@@ -63,54 +38,29 @@ const model = ref([
                         label: 'Booking List',
                         icon: 'pi pi-fw pi-list',
                         to: '/admin/booking-list'
-                    },
-                    {
-                        label: 'Access Denied',
-                        icon: 'pi pi-fw pi-lock',
-                        to: '/auth/access'
                     }
                 ]
             },
-            { 
-                label: 'Department', icon: 'pi pi-fw pi-home',
-                items: [
-                    {
-                        label: 'Login',
-                        icon: 'pi pi-fw pi-sign-in',
-                        to: '/auth/login'
-                    },
-                    {
-                        label: 'Error',
-                        icon: 'pi pi-fw pi-times-circle',
-                        to: '/auth/error'
-                    },
-                    {
-                        label: 'Access Denied',
-                        icon: 'pi pi-fw pi-lock',
-                        to: '/auth/access'
-                    }
-                ]
-            },
-            { 
-                label: 'Training', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon',
-                items: [
-                    {
-                        label: 'Login',
-                        icon: 'pi pi-fw pi-sign-in',
-                        to: '/auth/login'
-                    },
-                    {
-                        label: 'Error',
-                        icon: 'pi pi-fw pi-times-circle',
-                        to: '/auth/error'
-                    },
-                    {
-                        label: 'Access Denied',
-                        icon: 'pi pi-fw pi-lock',
-                        to: '/auth/access'
-                    }
-                ]
-            },
+            // { 
+            //     label: 'Training', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon',
+            //     items: [
+            //         {
+            //             label: 'Login',
+            //             icon: 'pi pi-fw pi-sign-in',
+            //             to: '/auth/login'
+            //         },
+            //         {
+            //             label: 'Error',
+            //             icon: 'pi pi-fw pi-times-circle',
+            //             to: '/auth/error'
+            //         },
+            //         {
+            //             label: 'Access Denied',
+            //             icon: 'pi pi-fw pi-lock',
+            //             to: '/auth/access'
+            //         }
+            //     ]
+            // },
             { 
                 label: 'Room', icon: 'pi pi-fw pi-home',
                 items: [
@@ -123,11 +73,6 @@ const model = ref([
                         label: 'Create Room',
                         icon: 'pi pi-fw pi-pencil',
                         to: '/admin/create-room'
-                    },
-                    {
-                        label: 'Access Denied',
-                        icon: 'pi pi-fw pi-lock',
-                        to: '/auth/access'
                     }
                 ]
             },

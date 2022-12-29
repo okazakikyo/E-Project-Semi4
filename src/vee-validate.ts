@@ -24,7 +24,12 @@ configure({
                 roomName: "Room name",
                 capacity: "Capacity",
                 start_date: "Start date",
-                end_date: "End date"
+                end_date: "End date",
+                email: "Email",
+                name: "Name",
+                phone: "Phone number",
+                birthday: "Birthday",
+                role: "Role"
             }
         }
     })

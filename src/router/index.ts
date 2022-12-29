@@ -7,6 +7,7 @@ import Error from '@/views/Error.vue';
 import Home from '@/views/User/Home.vue';
 import RoomDetail from '@/views/User/RoomDetail.vue';
 const Login = () => import("@/views/Login.vue");
+import UserCreate from '@/views/HR/User/UserCreate.vue';
 // import { getAuth, onAuthStateChanged, UserCredential } from 'firebase/auth';
 
 // const getCurrentUser = () => {
@@ -94,11 +95,6 @@ const routes = [
         component: () => import('@/components/CalendarDemo.vue')
       },
       {
-        path: '/hr/user-list',
-        name: 'UserList',
-        component: () => import('@/views/HR/User/UserList.vue')
-      },
-      {
         path: '/admin/booking-list',
         name: 'BookingList',
         component: () => import('@/views/Admin/Booking/BookingList.vue')
@@ -114,14 +110,14 @@ const routes = [
         component: () => import('@/views/Room/RoomList.vue')
       },
       {
-        path: '/trainee-list',
-        name: 'TraineeList',
-        component: () => import('@/views/Trainee/TraineeList.vue')
-      },
-      {
         path: '/hr/staff',
         name: 'StaffManage',
         component: () => import('@/views/HR/StaffManage.vue')
+      },
+      {
+        path: '/hr/user-account',
+        name: 'UserCreate',
+        component: UserCreate
       },
     ],
   },
