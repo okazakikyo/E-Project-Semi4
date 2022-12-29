@@ -84,11 +84,11 @@ const routes = [
         name: 'Dashboard',
         component: () => import('@/views/Dashboard.vue')
       },
-      {
-        path: '/calendar',
-        name: 'Calendar',
-        component: () => import('@/components/CalendarTest.vue')
-      },
+      // {
+      //   path: '/calendar',
+      //   name: 'Calendar',
+      //   component: () => import('@/components/CalendarTest.vue')
+      // },
       {
         path: '/calendar-demo',
         name: 'CalendarDemo',
