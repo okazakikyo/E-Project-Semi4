@@ -1,5 +1,6 @@
 <template>
 <Form @submit="onSubmit">
+    <Toast/>
   <div class="top d-flex justify-content-center align-items-center">
         <div class="top-text">
             {{ 'Room Details' }}
@@ -73,6 +74,7 @@ import { mapState, mapActions } from "pinia";
 import { useLayout } from '@/layout/composables/layout';
 import moment from 'moment';
 import { Field, Form, ErrorMessage } from "vee-validate";
+import { useLoading } from "vue-loading-overlay";
 
 export default defineComponent({
     setup: () => ({
@@ -92,12 +94,16 @@ export default defineComponent({
         ...mapState(useErrorStore, ['errors'])
     },
     methods: {
-        ...mapActions(useUserStore, ['getRoomById','bookRoom', 'updateRoom']),
+        ...mapActions(useErrorStore, ['setEmptyError']),
+        ...mapActions(useUserStore, ['getRoomById','bookRoom', 'updateRoom', 'addRoomBook']),
         async getRoomDetails() {
+            const $loading = useLoading();
+            const loader = $loading.show({});
             const { contextPath } = useLayout();
             this.contextPath = contextPath;
             const id = this.$route.params["id"] ? this.$route.params["id"] : null
             this.roomDetails = await this.getRoomById(id);
+            loader.hide();
         },
         getMinDate(date) {
             return moment(date).toDate();
@@ -106,12 +112,15 @@ export default defineComponent({
             return moment(date).toDate();
         },
         async onSubmit() {
-            console.log(localStorage)
+            const $loading = useLoading();
+            const loader = $loading.show({});
+            const user = JSON.parse(localStorage.getItem("user"))
             if(this.bookingRoom.slots > this.roomDetails.slots) {
                 console.log('error')
             }else {
-                this.bookingRoom.id = 1001;
-                this.bookingRoom.name = 'John';
+                this.bookingRoom.id = user.user.id;
+                this.bookingRoom.name = user.user.staff_id.name;
+                this.bookingRoom.email = user.user.email;
                 this.bookingRoom.status = 1;
                 this.bookingRoom.start_date = moment(this.bookingRoom.start_date).format('YYYY-MM-DD')
                 this.bookingRoom.end_date = moment(this.bookingRoom.end_date).format('YYYY-MM-DD')
@@ -146,13 +155,35 @@ export default defineComponent({
                         lastmodifiedat: "",
                         lastmodifiedby: ""
                     }
+                    const bookRoom = {
+                        room_id: parseInt(id),
+                        title: this.roomDetails.name,
+                        name: this.bookingRoom.name,
+                        email: this.bookingRoom.email,
+                        slots: this.bookingRoom.slots,
+                        description: this.roomDetails.description,
+                        image: this.roomDetails.image,
+                        status: this.roomDetails.active,
+                        createdAt: this.roomDetails.createAt,
+                        start_date: this.bookingRoom.start_date,
+                        end_date: this.bookingRoom.end_date,
+                        isDelete: this.roomDetails.isDelete,
+                        lastmodifiedat: "",
+                        lastmodifiedby: "",
+                        onlineLink: '',
+                    }
+                    await this.addRoomBook(bookRoom)
                     await this.updateRoom(id, updateData)
                     if(!this.errors) {
-                        this.$router.push({ name: 'UserHome' })
+                        this.$router.push({ name: 'UserBooking' })
+                    } else {
+                        this.$toast.add({severity:'error', summary:'Error Message', detail: this.errors, life: 3000})
+                        setTimeout(() => this.setEmptyError(), 2000)
                     }
                 } catch (error) {
                     console.log(error)
                 }
+                loader.hide();
             }
         }
     },

@@ -10,18 +10,18 @@ const isLoggedIn = ref(false);
 const model = ref([
     {
         label: 'Home',
-        items: [{ label: 'Home', icon: 'pi pi-fw pi-home', to: '/user/home' }]
+        items: [{ label: 'Home', icon: 'pi pi-fw pi-home', to: '/' }]
     },
     {
         label: 'User Manage',
         items: [
-            { label: 'Booking List', icon: 'pi pi-fw pi-user', to: '/user/booking-list' },
+            { label: 'Booking history', icon: 'pi pi-fw pi-user', to: '/booking-history' },
         ]
     },
 ]);
 const handleSignOut = () => {
-    localStorage.removeItem("clients");
-    router.push("/user")
+    localStorage.removeItem("user");
+    router.push({ name: 'UserLogin' })
 }
 </script>
 

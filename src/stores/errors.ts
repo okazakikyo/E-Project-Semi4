@@ -13,5 +13,8 @@ export const useErrorStore = defineStore({
     setError(errors: any) {
       this.errors = errors;
     },
+    setEmptyError() {
+      this.errors = null;
+    }
   },
 });

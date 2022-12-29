@@ -11,7 +11,7 @@ const isLoggedIn = ref(false);
 const model = ref([
     {
         label: 'Home',
-        items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }]
+        items: [{ label: 'Room List', icon: 'pi pi-fw pi-home', to: '/' }]
     },
     {
         label: 'List management',

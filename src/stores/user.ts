@@ -143,6 +143,16 @@ export const useUserStore = defineStore({
           
         }
       },
+      async getBookingHistory() {
+        try {
+          const res = await api.get<GenericResponse>(
+            'booking-history'
+          )
+          return res.data
+        } catch (error) {
+          
+        }
+      },
       async getUserList() {
         try {
           const res = await api.get<GenericResponse>(
@@ -159,9 +169,23 @@ export const useUserStore = defineStore({
             'booking-list',
             room
           )
+          console.log(res.data)
         } catch (error) {
           console.log(error)
         }
-      }
+      },
+      async addRoomBook(room: any) {
+        const storeError = useErrorStore();
+        try {
+          const res = await api.post<GenericResponse>(
+            `booking-history`,
+            room
+          )
+          console.log(res.data)
+          return res.data
+        } catch (error) {
+          storeError.setError(error);
+        }
+      },
     },
 })

@@ -70,7 +70,7 @@
                 <v-field
                   type="text"
                   rules="required|email"
-                  name="userName"
+                  name="email"
                   v-slot="{ field, meta }"
                 >
                   <InputText
@@ -83,7 +83,7 @@
                   />
                 </v-field>
                 <div>
-                  <error-message class="p-error" :name="'userName'"></error-message>
+                  <error-message class="p-error" :name="'email'"></error-message>
                 </div>
                 <label
                   for="password1"
@@ -196,6 +196,7 @@
       ...mapState(useErrorStore, ["errors"]),
     },
     methods: {
+      ...mapActions(useErrorStore, ['setEmptyError']),
       ...mapActions(useUserStore, ['login']),
       async onSubmit() {
         const $loading = useLoading();
@@ -231,6 +232,7 @@
         loader.hide();
       },
       closeConfirmation() {
+        this.setEmptyError();
         this.displayConfirmation = false;
       },
     },

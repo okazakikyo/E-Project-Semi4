@@ -9,6 +9,7 @@ import RoomDetail from '@/views/User/RoomDetail.vue';
 const Login = () => import("@/views/Login.vue");
 import UserLogin from '@/views/User/UserLogin.vue';
 import UserRegistration from '@/views/User/UserRegistration.vue';
+import UserBooking from '@/views/User/UserBooking.vue';
 // import { getAuth, onAuthStateChanged, UserCredential } from 'firebase/auth';
 
 // const getCurrentUser = () => {
@@ -26,10 +27,10 @@ import UserRegistration from '@/views/User/UserRegistration.vue';
 const ifNotAuthenticated = async (to: any, from: any, next: any) => {
   const userInfo: any = JSON.parse(localStorage.getItem("user"));
      if(userInfo) {
-        next("/user/home")
+        next("/")
      } else{
-        if (to.path === "/user/home") {
-          next("/user/home");
+        if (to.path === "/") {
+          next("/");
         }
         next()
      }
@@ -40,38 +41,43 @@ const ifAuthenticated = (async (to: any, from: any, next: any) => {
     if(userInfo) {
       next()
     } else{
-      next('/user/login')
+      next('/login')
     }
 });
 
 const routes = [
   {
-    path: '/user/login',
+    path: '/login',
     name: 'UserLogin',
     component: UserLogin,
     beforeEnter: ifNotAuthenticated,
   },
   {
-    path: '/user/register',
+    path: '/register',
     name: 'UserRegistration',
     component: UserRegistration,
     beforeEnter: ifNotAuthenticated,
   },
   {
-    path: '/user/home',
+    path: '/',
     name: 'HomeUser',
     component: HomeLayout,
     beforeEnter: ifAuthenticated,
     children: [
       {
-        path: '/user/home',
+        path: '/',
         name: 'UserHome',
         component: Home
       },
       {
-        path: '/user/home/room/:id?',
+        path: '/room/:id?',
         name: 'RoomDetail',
         component: RoomDetail
+      },
+      {
+        path: '/booking-history',
+        name: 'UserBooking',
+        component: UserBooking
       }
     ]
   },
