@@ -122,10 +122,10 @@ const isOutsideClicked = (event) => {
     </button>
 
     <div class="layout-topbar-menu" :class="topbarMenuClasses">
-      <button @click="toCalendar()" class="p-link layout-topbar-button">
+      <!-- <button @click="toCalendar()" class="p-link layout-topbar-button">
         <i class="pi pi-calendar"></i>
         <span>Calendar</span>
-      </button>
+      </button> -->
       <button @click="editUserMenu()" class="p-link layout-topbar-button">
         <i class="pi pi-user"></i>
         <span>Profile</span>
