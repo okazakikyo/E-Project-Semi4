@@ -205,6 +205,7 @@ import { useLayout } from "@/layout/composables/layout";
 import { useUserStore } from "@/stores/user";
 import { mapActions } from "pinia";
 import _ from 'lodash';
+import { useLoading } from "vue-loading-overlay";
 import Column from "primevue/column";
 
 const { contextPath } = useLayout();
@@ -222,6 +223,8 @@ const listBooking = mapActions(useUserStore, ['getBookingList'])
 const productService = new ProductService();
 
 onBeforeMount(async () => {
+  const $loading = useLoading();
+  const loader = $loading.show({});
   productService
     .getProductsWithOrdersSmall()
     .then((data) => (products.value = data));
@@ -240,7 +243,7 @@ onBeforeMount(async () => {
   }
   
   loading2.value = false;
-
+  loader.hide();
 });
 
 const editTrainerRoom = (id: any) => {
