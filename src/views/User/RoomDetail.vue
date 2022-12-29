@@ -60,6 +60,7 @@
                 </div>
             </div>
     </div>
+    <!-- <Paypal></Paypal> -->
     <div class="btn-layout d-flex justify-content-center">
         <button type="submit" class="btn-booking">Booking Now</button>
     </div>
@@ -75,6 +76,7 @@ import { useLayout } from '@/layout/composables/layout';
 import moment from 'moment';
 import { Field, Form, ErrorMessage } from "vee-validate";
 import { useLoading } from "vue-loading-overlay";
+import Paypal from "@/components/Paypal.vue";
 
 export default defineComponent({
     setup: () => ({
@@ -88,7 +90,8 @@ export default defineComponent({
     components: {
         Field,
         Form,
-        ErrorMessage
+        ErrorMessage,
+        Paypal
     },
     computed: {
         ...mapState(useErrorStore, ['errors'])

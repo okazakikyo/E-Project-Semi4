@@ -9,6 +9,7 @@ import {LoadingPlugin} from 'vue-loading-overlay';
 import { createPinia } from 'pinia'
 import VueLoading from "vue-loading-overlay";
 import { initializeApp } from 'firebase/app'
+import LoadScript from 'vue-plugin-load-script';
 // import { auth } from '@/firebase/index'
 
 import PrimeVue from 'primevue/config';
@@ -151,6 +152,7 @@ app.use(ToastService);
 app.use(DialogService);
 app.use(ConfirmationService);
 app.use(VueLoading);
+app.use(LoadScript);
 // app.use(auth);
 
 app.directive('tooltip', Tooltip);

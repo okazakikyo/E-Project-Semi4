@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     CalendarDemo: typeof import('./src/components/CalendarDemo.vue')['default']
     InputComponent: typeof import('./src/components/InputComponent.vue')['default']
     Modal: typeof import('./src/components/Modal.vue')['default']
+    Paypal: typeof import('./src/components/Paypal.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
