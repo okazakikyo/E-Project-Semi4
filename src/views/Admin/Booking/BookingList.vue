@@ -253,7 +253,7 @@ const closeEdit = () => {
 };
 
 const expandAll = () => {
-  expandedRows.value = products.value.filter((p) => p.id);
+  expandedRows.value = bookingList.value.filter((p) => p.id);
 };
 const collapseAll = () => {
   expandedRows.value = null;
