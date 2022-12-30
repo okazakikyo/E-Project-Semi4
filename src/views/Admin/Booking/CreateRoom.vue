@@ -89,7 +89,6 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
-import CountryService from '@/service/CountryService';
 import { useUserStore } from '@/stores/user'
 import { mapActions } from 'pinia';
 import { useToast } from "primevue/usetoast";
@@ -98,12 +97,10 @@ import { useRouter } from "vue-router";
 import moment from 'moment';
 
 const toast = useToast();
-const filteredCountries = ref(null);
 const checked1 = ref(true);
 const maxDate = ref(new Date());
 const minDate = ref(new Date());
 const roomInfo = ref({});
-const countryService = new CountryService();
 const previewImage = ref(null);
 const fileInput = ref(null);
 const emit = defineEmits(['input'])

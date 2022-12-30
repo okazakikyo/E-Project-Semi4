@@ -7,6 +7,7 @@ import { mapActions, mapState } from 'pinia';
 import { useLoading } from "vue-loading-overlay";
 import { useToast } from "primevue/usetoast";
 import router from '@/router';
+import moment from 'moment';
 
 const { contextPath } = useLayout();
 
@@ -16,7 +17,6 @@ const layout = ref('grid');
 const sortKey = ref(null);
 const sortOrder = ref(null);
 const sortField = ref(null);
-const displayModal = ref(false);
 const roomData = ref({});
 
 const sortSlot = ref([
@@ -54,22 +54,17 @@ const onSortSlot = (event) => {
     }
 };
 
+const maxDateCurrent = (date) => {
+    const current = moment().format()
+    const dateValue = moment(date).format()
+    return current >= dateValue
+}
+
 const roomDetails = async (id) => {
     const $loading = useLoading();
     const loader = $loading.show({});
-    // displayModal.value = true
     // roomData.value = await roomMethod.getRoomById(id)
     router.push({ name: 'RoomDetail', params: { id: id } })
-    loader.hide();
-}
-
-const updateRoom = async (id, data) => {
-    const $loading = useLoading();
-    const loader = $loading.show({});
-    await roomMethod.updateRoom(id ,data);
-    displayModal.value = false
-    toast.add({severity:'success', summary: 'Success Message', detail:'Save change success', life: 3000});
-    await roomMethod.getRoomList();
     loader.hide();
 }
 
@@ -105,9 +100,9 @@ const updateRoom = async (id, data) => {
                                 </div>
                                 <div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
                                     <span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">{{ slotProps.data.capacity }} slots</span>
-                                    <Button icon="pi pi-book" label="Booking" :disabled="slotProps.data.active === 0" class="mb-2" @click="roomDetails(slotProps.data.id)"></Button>
-                                    <span :class="'product-badge status-' + (slotProps.data.active ? 'instock' : 'outofstock')">
-                                        {{ slotProps.data.active ? 'Active' : 'Deactive' }}
+                                    <Button icon="pi pi-book" label="Booking" :disabled="slotProps.data.active === 0 || slotProps.data.capacity <= 0 || maxDateCurrent(slotProps.data.end_date)" class="mb-2" @click="roomDetails(slotProps.data.id)"></Button>
+                                    <span :class="'product-badge status-' + (slotProps.data.active === 0 || slotProps.data.capacity <= 0 || maxDateCurrent(slotProps.data.end_date) ? 'outofstock' : 'instock')">
+                                        {{ slotProps.data.active === 0 || slotProps.data.capacity <= 0 || maxDateCurrent(slotProps.data.end_date) ? 'Deactive' : 'Active' }}
                                     </span>
                                 </div>
                             </div>
@@ -121,8 +116,9 @@ const updateRoom = async (id, data) => {
                                     <div class="flex align-items-center">
                                         <i class="pi pi-tag mr-2"></i>
                                     </div>
-                                    <span :class="'product-badge status-' + (slotProps.data.active ? 'instock' : 'outofstock')">
-                                        {{ slotProps.data.active ? 'Active' : 'Deactive' }}
+                                    <span :class="'product-badge status-' + 
+                                    (slotProps.data.active == 0 || slotProps.data.capacity <= 0 || maxDateCurrent(slotProps.data.end_date)? 'outofstock' : 'instock')">
+                                        {{ slotProps.data.active == 0 || slotProps.data.capacity <= 0 || maxDateCurrent(slotProps.data.end_date) ? 'Deactive' : 'Active' }}
                                     </span>
                                 </div>
                                 <div class="text-center">
@@ -132,7 +128,7 @@ const updateRoom = async (id, data) => {
                                 </div>
                                 <div class="flex align-items-center justify-content-between">
                                     <span class="text-2xl font-semibold">{{ slotProps.data.capacity }} slots</span>
-                                    <Button icon="pi pi-book" :disabled="slotProps.data.active === 0" @click="roomDetails(slotProps.data.id)"></Button>
+                                    <Button icon="pi pi-book" :disabled="slotProps.data.active == 0 || slotProps.data.capacity <= 0 || maxDateCurrent(slotProps.data.end_date)" @click="roomDetails(slotProps.data.id)"></Button>
                                 </div>
                             </div>
                         </div>
@@ -141,18 +137,6 @@ const updateRoom = async (id, data) => {
             </div>
         </div>
     </div>
-    <!-- Edit modal -->
-  <Dialog header="Header" v-model:visible="displayModal" :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
-    :style="{ width: '50vw' }" :modal="true">
-      {{ roomData }}
-      <div class="m-0">
-        <InputText v-model="roomData.name"></InputText>
-      </div>
-    <template #footer>
-      <Button label="No" icon="pi pi-times" @click="displayModal = false" class="p-button-text" />
-      <Button label="Yes" icon="pi pi-check" @click="updateRoom(roomData.id, roomData)" autofocus />
-    </template>
-  </Dialog>
 </template>
 
 <style scoped lang="scss">

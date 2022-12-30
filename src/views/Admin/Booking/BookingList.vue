@@ -76,10 +76,10 @@
                   <template #body="slotProps">
                     <span :class="
                       'order-badge order-' +
-                      (slotProps.data.status == 1 || !maxDateCurrent(slotProps.data.end_time)
+                      (!maxDateCurrent(slotProps.data.end_date)
                         ? 'delivered'
                         : 'cancelled')
-                    ">{{ slotProps.data.status == 1 || !maxDateCurrent(slotProps.data.end_time) ? 'Active' : 'Deactive' }}</span>
+                    ">{{ !maxDateCurrent(slotProps.data.end_date) ? 'Training' : 'Done' }}</span>
                   </template>
                 </Column>
                 <Column field="slots" header="Slots" :sortable="true" headerStyle="width:4rem">
@@ -110,8 +110,6 @@
 </template>
 <script setup lang="ts">
 import { FilterMatchMode, FilterOperator } from "primevue/api";
-import CustomerService from "@/service/CustomerService";
-import ProductService from "@/service/ProductService";
 import { ref, onBeforeMount } from "vue";
 import { useLayout } from "@/layout/composables/layout";
 import { useUserStore } from "@/stores/user";
@@ -133,14 +131,9 @@ const nameRoom = ref({});
 
 const listBooking = mapActions(useUserStore, ['getBookingList'])
 
-const productService = new ProductService();
-
 onBeforeMount(async () => {
   const $loading = useLoading();
   const loader = $loading.show({});
-  productService
-    .getProductsWithOrdersSmall()
-    .then((data) => (products.value = data));
 
   try {
     bookingList.value = await listBooking.getBookingList()

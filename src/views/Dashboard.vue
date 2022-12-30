@@ -10,32 +10,6 @@ import _ from 'lodash';
 
 const { isDarkTheme, contextPath } = useLayout();
 
-const products = ref(null);
-const lineData = reactive({
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-        {
-            label: 'First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            backgroundColor: '#2f4860',
-            borderColor: '#2f4860',
-            tension: 0.4
-        },
-        {
-            label: 'Second Dataset',
-            data: [28, 48, 40, 19, 86, 27, 90],
-            fill: false,
-            backgroundColor: '#00bb7e',
-            borderColor: '#00bb7e',
-            tension: 0.4
-        }
-    ]
-});
-const items = ref([
-    { label: 'Add New', icon: 'pi pi-fw pi-plus' },
-    { label: 'Remove', icon: 'pi pi-fw pi-minus' }
-]);
 const user = ref({});
 const room = ref({});
 const booking = ref({});
@@ -48,7 +22,6 @@ const callList = mapActions(useUserStore, ['getListUser', 'getBookingList', 'get
 onMounted(async () => {
     const $loading = useLoading();
     const loader = $loading.show({});
-    productService.getProductsSmall().then((data) => (products.value = data));
     try {
         user.value = await callList.getListUser();
         booking.value = await callList.getBookingList();
@@ -57,9 +30,6 @@ onMounted(async () => {
     loader.hide();
 });
 
-const formatCurrency = (value) => {
-    return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-};
 const applyLightTheme = () => {
     lineOptions.value = {
         plugins: {
