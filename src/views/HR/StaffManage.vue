@@ -2,7 +2,7 @@
 <div class="">
     <div class="card" v-if="user.length > 0">
             <h5>User List</h5>
-            <DataTable :value="user" :paginator="true" class="p-datatable-customers" showGridlines :rows="10"
+            <DataTable :value="userSort" :paginator="true" class="p-datatable-customers" showGridlines :rows="10"
                 dataKey="id" v-model:filters="filters1" filterDisplay="menu" :loading="loading1" responsiveLayout="scroll"
                 :globalFilterFields="['staff_id.name','email','staff_id.phone','role','staff_id.birthday', 'staff_id.bank_id', 'isDelete']">
                 <template #header>
@@ -50,7 +50,7 @@
                         <span class="image-text">{{data.role}}</span>
                     </template>
                 </Column>
-                <Column header="Date" filterField="date" dataType="date" style="min-width:10rem">
+                <Column header="Birthday" filterField="date" dataType="date" style="min-width:10rem">
                     <template #body="{data}">
                         {{formatDate(data.staff_id.birthday, 'YYYY/MM/DD')}}
                     </template>
@@ -119,6 +119,7 @@ import { mapActions, mapState } from "pinia";
 import {FilterMatchMode,FilterOperator} from 'primevue/api';
 import { useLoading } from "vue-loading-overlay";
 import moment from "moment";
+import _ from 'lodash';
 
 export default defineComponent ({
     setup: () => ({
@@ -143,7 +144,8 @@ export default defineComponent ({
         active: [
             { name: 'Active', code: 0 },
             { name: 'InActive', code: 1 }
-        ]
+        ],
+        userSort: []
     }),
     computed: {
         ...mapState(useUserStore, ['user'])
@@ -152,9 +154,9 @@ export default defineComponent ({
         ...mapActions(useUserStore, ['getListUser', 'getUser', 'updateUser']),
         async getListUserData() {
             await this.getListUser();
-            console.log(this.user)
+            const sortUser = _.reverse(this.user)
+            this.userSort = sortUser
             this.loading1 = false;
-            console.log(this.filters1)
             this.initFilters1();
         },
         initFilters1() {

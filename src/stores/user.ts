@@ -44,11 +44,11 @@ export const useUserStore = defineStore({
             user
           )
           this.loginData = response.data
-          if(this.loginData.user.role == "admin") {
+          if(this.loginData.user.role == "admin" || this.loginData.user.isDelete == 1) {
             localStorage.setItem('user', JSON.stringify(this.loginData))
             return this.loginData
           } else {
-            storeError.setError("Admin account only, please try again!")
+            storeError.setError("Your account can't access this page, please check again!")
           }
         }catch(e) {
           if(e.response.status == 400) {

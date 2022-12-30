@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="card">
         <h5>Booking List</h5>
-        <DataTable :value="bookingList" v-model:expandedRows="expandedRows" dataKey="id" responsiveLayout="scroll">
+        <DataTable :value="bookingSort" v-model:expandedRows="expandedRows" dataKey="id" responsiveLayout="scroll">
           <template #header>
             <div>
               <Button icon="pi pi-plus" label="Expand All" @click="expandAll" class="mr-2 mb-2" />
@@ -127,7 +127,7 @@ const bookingList = ref({});
 const expandedRows = ref([]);
 const displayModal = ref(false);
 const roomDetails = ref({});
-const nameRoom = ref({});
+const bookingSort = ref({});
 
 const listBooking = mapActions(useUserStore, ['getBookingList'])
 
@@ -137,10 +137,8 @@ onBeforeMount(async () => {
 
   try {
     bookingList.value = await listBooking.getBookingList()
-    const groupRoom = _.groupBy(bookingList.value, 'title')
-    // nameRoom.value = groupRoom
-    const lengthObj = Object.keys(groupRoom)
-    nameRoom.value = lengthObj
+    const sortBooking = _.reverse(bookingList.value)
+    bookingSort.value = sortBooking
   } catch (error) {
     console.log(error)
   }
