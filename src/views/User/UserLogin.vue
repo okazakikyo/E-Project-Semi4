@@ -133,7 +133,7 @@
                       >Registration
                     </RouterLink>
                   </div>
-                  <a
+                  <!-- <a
                     class="
                       font-medium
                       no-underline
@@ -143,7 +143,7 @@
                     "
                     style="color: var(--primary-color)"
                     >Forgot password?</a
-                  >
+                  > -->
                 </div>
                 <Button
                   type="submit"

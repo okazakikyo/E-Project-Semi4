@@ -72,7 +72,8 @@ export default defineComponent({
            const idUser = _.filter(this.bookingList, (o) => {
                 return o.email == user.user.email
            })
-           this.userId = idUser
+           const sortList = _.reverse(idUser)
+           this.userId = sortList
         }
     },
     async created() {

@@ -8,6 +8,7 @@ import { useLoading } from "vue-loading-overlay";
 import { useToast } from "primevue/usetoast";
 import router from '@/router';
 import moment from 'moment';
+import _ from 'lodash';
 
 const { contextPath } = useLayout();
 
@@ -18,6 +19,7 @@ const sortKey = ref(null);
 const sortOrder = ref(null);
 const sortField = ref(null);
 const roomData = ref({});
+const roomSort = ref();
 
 const sortSlot = ref([
     { label: 'Slot High to Low', value: '!capacity' },
@@ -33,9 +35,11 @@ onMounted( async () => {
     const $loading = useLoading();
     const loader = $loading.show({});
 
-    productService.getRoomList().then((data) => (roomList.value = data));
-
-    await roomMethod.getRoomList();
+    await roomMethod.getRoomList().then((data) => (roomList.value = data));
+    const sortRoom = _.reverse(roomStore.roomList(), (r) => {
+        return r.id
+    })
+    roomSort.value = sortRoom
     loader.hide();
 });
 
@@ -76,7 +80,7 @@ const roomDetails = async (id) => {
         <div class="col-12">
             <div class="card">
                 <h5>Room List</h5>
-                <DataView :value="roomStore.roomList()" :layout="layout" :paginator="true" :rows="9" :sortOrder="sortOrder" :sortField="sortField">
+                <DataView :value="roomSort" :layout="layout" :paginator="true" :rows="9" :sortOrder="sortOrder" :sortField="sortField">
                     <template #header>
                         <div class="grid grid-nogutter">
                             <div class="col-6 text-left">
