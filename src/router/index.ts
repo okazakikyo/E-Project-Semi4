@@ -44,23 +44,23 @@ const ifAuthenticated = (async (to: any, from: any, next: any) => {
 });
 
 const routes = [
-  {
-    path: '/user',
-    name: 'HomeUser',
-    component: HomeLayout,
-    children: [
-      {
-        path: '/user/home',
-        name: 'UserHome',
-        component: Home
-      },
-      {
-        path: '/user/home/room/:id?',
-        name: 'RoomDetail',
-        component: RoomDetail
-      }
-    ]
-  },
+  // {
+  //   path: '/user',
+  //   name: 'HomeUser',
+  //   component: HomeLayout,
+  //   children: [
+  //     {
+  //       path: '/user/home',
+  //       name: 'UserHome',
+  //       component: Home
+  //     },
+  //     {
+  //       path: '/user/home/room/:id?',
+  //       name: 'RoomDetail',
+  //       component: RoomDetail
+  //     }
+  //   ]
+  // },
   {
     path: '/login',
     name: 'Login',
