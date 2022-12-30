@@ -30,7 +30,7 @@
           </Column>
           <Column field="description" header="Description" :sortable="true">
             <template #body="slotProps">
-              {{ formatCurrency(slotProps.data.description) }}
+              {{ slotProps.data.description }}
             </template>
           </Column>
           <Column field="start_time" header="Start date" :sortable="true">
@@ -47,10 +47,10 @@
             <template #body="slotProps">
               <span :class="
                 'product-badge status-' +
-                (slotProps.data.status
+                (slotProps.data.status == 1 || !maxDateCurrent(slotProps.data.end_time)
                   ? 'instock'
                   : 'outofstock')
-              ">{{ slotProps.data.status ? 'Available' : 'Full' }}</span>
+              ">{{ slotProps.data.status == 1 || !maxDateCurrent(slotProps.data.end_time) ? 'Available' : 'Full' }}</span>
             </template>
           </Column>
           <template #expansion="slotProps">
@@ -76,15 +76,16 @@
                   <template #body="slotProps">
                     <span :class="
                       'order-badge order-' +
-                      (slotProps.data.status
+                      (slotProps.data.status == 1 || !maxDateCurrent(slotProps.data.end_time)
                         ? 'delivered'
                         : 'cancelled')
-                    ">{{ slotProps.data.status ? 'Active' : 'Deactive' }}</span>
+                    ">{{ slotProps.data.status == 1 || !maxDateCurrent(slotProps.data.end_time) ? 'Active' : 'Deactive' }}</span>
                   </template>
                 </Column>
-                <Column headerStyle="width:4rem">
+                <Column field="slots" header="Slots" :sortable="true" headerStyle="width:4rem">
                   <template #body="slotProps">
-                    <Button icon="pi pi-pencil" @click="editTrainerRoom(slotProps.data)" />
+                    <!-- <Button icon="pi pi-pencil" @click="editTrainerRoom(slotProps.data)" /> -->
+                    {{ slotProps.data.slots }}
                   </template>
                 </Column>
               </DataTable>
@@ -93,95 +94,6 @@
         </DataTable>
       </div>
     </div>
-
-    <!-- <div class="col-12">
-      <div class="card">
-        <h5>Booking List</h5>
-        <DataTable :value="nameRoom" v-model:expandedRows="expandedRows" dataKey="id" responsiveLayout="scroll">
-          <Column :expander="true" headerStyle="width: 3rem"/>
-          <Column header="Name" :sortable="true">
-            <template #body="name">
-              {{ name.index }}
-            </template>
-          </Column>
-          <Column header="Image">
-            <template #body="slotProps">
-              <img :src="
-                contextPath + 'demo/images/room/' + slotProps.data[0].image
-              " :alt="slotProps.data[0].name" class="shadow-2" width="100" />
-            </template>
-          </Column>
-          <Column field="host" header="Host" :sortable="true">
-            <template #body="slotProps">
-              {{ slotProps.data[0].host }}
-            </template>
-          </Column>
-          <Column field="description" header="Description" :sortable="true">
-            <template #body="slotProps">
-              {{ slotProps.data[0].description }}
-            </template>
-          </Column>
-          <Column field="start_time" header="Start date" :sortable="true">
-            <template #body="slotProps">
-              {{ (slotProps.data[0].start_time) }}
-            </template>
-          </Column>
-          <Column field="end_time" header="End date" :sortable="true">
-            <template #body="slotProps">
-              {{ (slotProps.data[0].end_time) }}
-            </template>
-          </Column>
-          <Column field="status" header="Status" :sortable="true">
-            <template #body="slotProps">
-              <span :class="
-                'product-badge status-' +
-                (slotProps.data[0].status
-                  ? 'instock'
-                  : 'outofstock')
-              ">{{ slotProps.data[0].status ? 'Available' : 'Full' }}</span>
-            </template>
-          </Column>
-          <template #expansion="slotProps">
-            <div class="p-3">
-              {{ slotProps }}
-              <h5>Orders for</h5>
-              <DataTable :value="groupName(slotProps.data)" responsiveLayout="scroll">
-                <Column header="Name" :sortable="true">
-                  <template #body="props">
-                    {{ props.data }}
-                  </template>
-                </Column>
-                <Column field="start_date" header="Start Date" :sortable="true">
-                  <template #body="slotProps">
-                    {{ slotProps.data.start_date }}
-                  </template>
-                </Column>
-                <Column field="end_date" header="End Date" :sortable="true">
-                  <template #body="slotProps">
-                    {{ slotProps.data.end_date }}
-                  </template>
-                </Column>
-                <Column field="status" header="Status" :sortable="true">
-                  <template #body="slotProps">
-                    <span :class="
-                      'order-badge order-' +
-                      (slotProps.data.status
-                        ? 'delivered'
-                        : 'cancelled')
-                    ">{{ slotProps.data.status ? 'Active' : 'Deactive' }}</span>
-                  </template>
-                </Column>
-                <Column headerStyle="width:4rem">
-                  <template #body="slotProps">
-                    <Button icon="pi pi-pencil" @click="editTrainerRoom(slotProps.data)" />
-                  </template>
-                </Column>
-              </DataTable>
-            </div>
-          </template>
-        </DataTable>
-      </div>
-    </div> -->
   </div>
 
   <!-- Edit modal -->
@@ -207,6 +119,7 @@ import { mapActions } from "pinia";
 import _ from 'lodash';
 import { useLoading } from "vue-loading-overlay";
 import Column from "primevue/column";
+import moment from "moment";
 
 const { contextPath } = useLayout();
 
@@ -233,11 +146,8 @@ onBeforeMount(async () => {
     bookingList.value = await listBooking.getBookingList()
     const groupRoom = _.groupBy(bookingList.value, 'title')
     // nameRoom.value = groupRoom
-    console.log(bookingList.value)
     const lengthObj = Object.keys(groupRoom)
-    console.log(lengthObj)
     nameRoom.value = lengthObj
-    console.log(nameRoom.value)
   } catch (error) {
     console.log(error)
   }
@@ -251,6 +161,12 @@ const editTrainerRoom = (id: any) => {
   roomDetails.value = id;
 };
 
+const maxDateCurrent = (date) => {
+    const current = moment().format()
+    const dateValue = moment(date).format()
+    return current >= dateValue
+}
+
 const closeEdit = () => {
   displayModal.value = false;
 };
@@ -261,17 +177,7 @@ const expandAll = () => {
 const collapseAll = () => {
   expandedRows.value = null;
 };
-const formatCurrency = (value) => {
-  return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
-};
 
-const formatDate = (value) => {
-  return value.toLocaleDateString("en-US", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-};
 </script>
 
 <style scoped lang="scss">
